@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Resposta</title>
+    </head>
+
+    <body>
+    {% if is_correct %}
+        Resposta correta!
+    {% else %}
+        Resposta errada!
+    {% endif %}
+
+    <br/>
+    <br/>
+    <a href="{% url 'question' %}">Tente novamente</a>
+
+    </body>
+</html>
