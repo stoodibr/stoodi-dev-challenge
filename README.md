@@ -19,7 +19,7 @@ múltipla escolha, ao respondê-la o usuário recebe um feedback de acerto ou er
 4. Desenvolver as histórias pedidas abaixo no seu repositório. De preferência,
    com pelo menos um commit na finalização de cada história;
 5. Ao terminar o desenvolvimento, dê acesso de leitura ao usuário
-   NilsonStoodi(nilson@stoodi.com.br) ao seu repositório.
+   bgfranca(bgfranca@gmail.com) ao seu repositório.
 
 
 ## Considerações:
