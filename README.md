@@ -1,4 +1,4 @@
-# PROCESSO DE SELEÇÃO DE ENGENHEIRO DE SOFTWARE
+# PROCESSO DE SELEÇÃO DE PESSOA DESENVOLVEDORA
 
 Este repositório faz parte da primeira fase do processo seletivo do Stoodi.
 
