@@ -17,7 +17,7 @@ build: ## Build the container
 	docker run -dit --name $(CONTAINER) -v $(shell pwd):/deploy -p 8000:8000 $(IMAGE) /bin/bash
 
 test: ## Run tests
-	$(MANAGECMD) python manage.py test
+	$(MANAGECMD) python3 manage.py test
 
 restart: ## Restart the container
 	docker restart $(CONTAINER)
@@ -27,7 +27,7 @@ cmd: ## Access bash
 
 up:
 	docker restart $(CONTAINER)
-	$(MANAGECMD) /bin/bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+	$(MANAGECMD) /bin/bash -c "python3 manage.py migrate && python manage.py runserver 0.0.0.0:8000"
 
 down:
 	docker stop $(CONTAINER)
