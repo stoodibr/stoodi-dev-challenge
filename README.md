@@ -27,6 +27,7 @@ múltipla escolha, ao respondê-la o usuário recebe um feedback de acerto ou er
 - Neste teste vamos focar apenas nas funcionalidades. A apresentação do site não contará pontos.
 - O usuário admin do sistema django é user:admin/senha:admin.
 - Se você usa docker, basta rodar `make build && make up` para ter o projeto rodando em http://localhost:8000/
+- Não se esqueça de fazer testes unitários!!
 
 
 # Histórias
