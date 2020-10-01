@@ -19,7 +19,7 @@ múltipla escolha, ao respondê-la o usuário recebe um feedback de acerto ou er
 4. Desenvolver as histórias pedidas abaixo no seu repositório. De preferência,
    com pelo menos um commit na finalização de cada história;
 5. Ao terminar o desenvolvimento, dê acesso de leitura ao usuário
-   bgfranca(brunogomesfranca@gmail.com) ao seu repositório.
+   brunogfranca(brunogomesfranca@gmail.com) ao seu repositório.
 
 
 ## Considerações:
