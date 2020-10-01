@@ -1,20 +1,20 @@
-# PROCESSO DE SELEÇÃO DE ENGENHEIRO DE SOFTWARE
+# PROCESSO DE SELEÇÃO DE PESSOA DESENVOLVEDORA
 
 Este repositório faz parte da primeira fase do processo seletivo do Stoodi.
 
 Se você não tem experiência com o Django, recomendamos que você faça pelo menos
 este tutorial antes de começar:
-https://docs.djangoproject.com/en/1.11/intro/tutorial01/
+https://docs.djangoproject.com/en/3.1/intro/tutorial01/
 
 Neste repositório, encontra-se o código de um sistema simples desenvolvido em
-Django(1.11.x). O sistema consiste em uma página que contém uma questão de
+Django(3.1.X). O sistema consiste em uma página que contém uma questão de
 múltipla escolha, ao respondê-la o usuário recebe um feedback de acerto ou erro.
 
 
 ## Para participar desta parte do processo você deve:
 1. Fazer um fork deste projeto;
-2. Criar um repositório FECHADO(private) na sua conta do bitbucket;
-3. Colocar o seu nome email e nome no topo deste arquivo README do seu
+2. Criar um repositório FECHADO(private) na sua conta do github;
+3. Colocar o seu nome e email no topo deste arquivo README do seu
    repositório;
 4. Desenvolver as histórias pedidas abaixo no seu repositório. De preferência,
    com pelo menos um commit na finalização de cada história;
