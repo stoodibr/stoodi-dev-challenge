@@ -1,4 +1,5 @@
 # PROCESSO DE SELEÇÃO DE PESSOA DESENVOLVEDORA
+Candidato: Guilherme Viegas De Faria (guivfaria@gmail.com)
 
 Se você não tem experiência com o Django, recomendamos que você faça pelo menos
 este tutorial antes de começar:
