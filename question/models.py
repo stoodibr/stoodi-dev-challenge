@@ -7,6 +7,9 @@ class Question(models.Model):
         verbose_name="Questão",
         help_text="Enunciado da questão."
     )
+    correct_answer = models.CharField(
+        max_length=1
+    )
 
     def add_answer(self, letter, value):
         Answer.objects.create(
@@ -37,4 +40,3 @@ class Answer(models.Model):
     value = models.TextField(
         verbose_name='Texto da resposta'
     )
-
