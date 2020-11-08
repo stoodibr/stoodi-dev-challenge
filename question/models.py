@@ -22,6 +22,9 @@ class Question(models.Model):
 
 
 class Answer(models.Model):
+    class Meta:
+        unique_together = ('question_id', 'letter')
+
     question = models.ForeignKey(
         'question.Question',
         related_name='answers',
