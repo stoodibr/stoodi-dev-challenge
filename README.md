@@ -1,5 +1,5 @@
 # PROCESSO DE SELEÇÃO DE PESSOA DESENVOLVEDORA
-# GUILHERME VIEGAS DE FARIA (GUIVFARIA@GMAIL.COM)
+GUILHERME VIEGAS DE FARIA (GUIVFARIA@GMAIL.COM)
 
 Se você não tem experiência com o Django, recomendamos que você faça pelo menos
 este tutorial antes de começar:
