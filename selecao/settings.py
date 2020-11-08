@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
 
     'question',
+    'private_area',
 )
 
 MIDDLEWARE = (

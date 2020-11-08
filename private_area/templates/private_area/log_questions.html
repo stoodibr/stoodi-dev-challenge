@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+    </head>
+
+    <body>
+        {% for response in responses %}
+            <p>
+                <b>Questão:</b> {{ response.question_id }}
+                <b>Resposta:</b> {{ response.answer }}
+                <b>Resposta correta:</b> {{ response.is_correct }}
+                <b>Data:</b> {{ response.answered_at }}
+            </p>
+            <br>
+        {% endfor %}
+    </body>
+</html>
