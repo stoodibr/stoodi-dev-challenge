@@ -40,7 +40,7 @@ def question_answer(request):
     question = Question.objects.get(id=current_question)
     is_correct = answer == question.correct_answer
 
-    Response.objects.create(question=question, user_id=(request.session['user_id'] or None), answer=answer, is_correct=is_correct)
+    Response.objects.create(question=question, user_id=request.session.get('user_id', None), answer=answer, is_correct=is_correct)
 
     context = {
         'is_correct': is_correct,
