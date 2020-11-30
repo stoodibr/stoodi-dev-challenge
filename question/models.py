@@ -52,7 +52,7 @@ class Answer(models.Model):
         max_length=1,
         verbose_name='Opção (letra)'
     )
-    value = models.TextField(
+    text = models.TextField(
         verbose_name='Texto da resposta'
     )
 
