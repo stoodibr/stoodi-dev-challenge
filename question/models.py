@@ -6,7 +6,8 @@ from django.db import models
 class Question(models.Model):
     title = models.TextField(
         verbose_name="Questão",
-        help_text="Enunciado da questão."
+        help_text="Enunciado da questão.",
+        max_length=3000
     )
     correct_answer = models.CharField(
         max_length=1,
