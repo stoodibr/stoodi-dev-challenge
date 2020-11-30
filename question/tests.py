@@ -47,13 +47,13 @@ class QuestionTestCase(TestCase):
         return question, title, answers
 
     def test_sorted_answers(self):
-        ''' verifica se alternativas estão ordenadas '''
+        """verifica se alternativas estão ordenadas."""
         _, _, answers = self.create_a_question()
 
         self.assertEqual(list(Question.objects.last().get_answers().keys()), list(sorted(answers.keys())))
 
     def test_create_question(self):
-        ''' verifica a criação de uma questão no banco '''
+        """verifica a criação de uma questão no banco."""
         question, title, answers = self.create_a_question()
 
         self.assertEqual(question.title, title)
@@ -70,14 +70,14 @@ class QuestionTestCase(TestCase):
         })
 
     def test_no_question(self):
-        ''' verifica resposta quando não há questões cadastradas no banco '''
+        """verifica resposta quando não há questões cadastradas no banco"""
 
         response = self.__client.get('/')
 
         self.assertTemplateUsed(response, 'question/no_question.html')
 
     def test_question(self):
-        ''' verifica resposta requisição sem parâmetros '''
+        """verifica resposta requisição sem parâmetros."""
         question, _, _ = self.create_a_question()
         question.set_correct_answer('d')
 
@@ -94,6 +94,7 @@ class QuestionTestCase(TestCase):
             self.assertEqual(answer, answers[letter])
 
     def test_correct_answer(self):
+        """caso em que resposta para questão está correta."""
         question, _, _ = self.create_a_question()
         question.set_correct_answer(letter='d')
 
@@ -112,6 +113,7 @@ class QuestionTestCase(TestCase):
         self.assertEqual(response.context['previous_question'], str(previous))
 
     def test_wrong_answer(self):
+        """caso em que resposta para questão está incorreta."""
         question, _, _ = self.create_a_question()
         question.set_correct_answer(letter='d')
 
