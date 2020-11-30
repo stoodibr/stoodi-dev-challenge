@@ -41,6 +41,11 @@ class QuestionTestCase(TestCase):
             'e': '16',
         }
 
+        for answer in answers:
+            question.add_answer(answer, answers[answer])
+
+        return question, title, answers
+
     def test_sorted_answers(self):
         ''' verifica se alternativas estão ordenadas '''
         _, _, answers = self.create_a_question()
@@ -56,7 +61,7 @@ class QuestionTestCase(TestCase):
 
         question.set_correct_answer('d')
 
-        self.assertEqual(question.correct_answer, 'd')
+        self.assertEqual(question.correct_answer.letter, 'd')
         self.assertDictEqual(question.to_dict(), {
             'id': question.id,
             'title': title,
@@ -74,7 +79,10 @@ class QuestionTestCase(TestCase):
     def test_question(self):
         ''' verifica resposta requisição sem parâmetros '''
         question, _, _ = self.create_a_question()
-        self.create_another_question()
+        question.set_correct_answer('d')
+
+        another_question, _, _ = self.create_another_question()
+        another_question.set_correct_answer('d')
 
         response = self.__client.get('/')
 
@@ -120,7 +128,3 @@ class QuestionTestCase(TestCase):
 
         self.assertEqual(response.context['is_correct'], False)
         self.assertEqual(response.context['previous_question'], str(previous))
-
-
-
-

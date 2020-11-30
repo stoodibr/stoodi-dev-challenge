@@ -9,24 +9,26 @@ class Question(models.Model):
         help_text="Enunciado da questão.",
         max_length=3000
     )
-    correct_answer = models.CharField(
-        max_length=1,
-        null=True
+    correct_answer = models.ForeignKey(
+        'question.Answer',
+        related_name='correct_answer',
+        null=True,
+        on_delete=models.PROTECT
     )
 
     def add_answer(self, letter, value):
         Answer.objects.create(
             question=self,
             letter=letter,
-            value=value
+            text=value
         )
 
     def set_correct_answer(self, letter):
-        self.correct_answer = letter
+        self.correct_answer = Answer.objects.get(question=self, letter=letter)
         self.save()
 
     def get_answers(self):
-        answers = {answer.letter:answer.value for answer in self.answers.all()}
+        answers = {answer.letter:answer.text for answer in self.answers.all()}
 
         return OrderedDict(sorted(answers.items()))
 
@@ -35,7 +37,7 @@ class Question(models.Model):
             'id': self.id,
             'title': self.title,
             'answers': self.get_answers(),
-            'correct_answer': self.correct_answer
+            'correct_answer': self.correct_answer.letter
         }
 
 
@@ -46,7 +48,7 @@ class Answer(models.Model):
     question = models.ForeignKey(
         'question.Question',
         related_name='answers',
-        on_delete = models.CASCADE
+        on_delete=models.CASCADE
     )
     letter = models.CharField(
         max_length=1,
@@ -66,12 +68,17 @@ class Response(models.Model):
     question = models.ForeignKey(
         'question.Question',
         related_name='responses',
-        on_delete = models.CASCADE
+        on_delete=models.CASCADE
     )
-    answer = models.CharField(
-        max_length=1
+    answer = models.ForeignKey(
+        'question.Answer',
+        on_delete=models.PROTECT
     )
-    is_correct = models.BooleanField()
+
+
+    @property
+    def is_correct(self):
+        return self.answer == self.question.correct_answer
 
     def to_dict(self):
         return {

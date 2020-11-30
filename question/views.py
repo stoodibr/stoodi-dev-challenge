@@ -1,6 +1,6 @@
 #coding: utf8
 from django.shortcuts import render
-from .models import Question, Response
+from .models import Answer, Question, Response
 
 
 def question(request):
@@ -38,12 +38,12 @@ def question_answer(request):
     answer = request.POST.get('answer', 'z')
     current_question = request.POST.get('current_question')
     question = Question.objects.get(id=current_question)
-    is_correct = answer == question.correct_answer
+    answer = Answer.objects.get(question=question, letter=answer)
 
-    Response.objects.create(question=question, user_id=request.session.get('user_id', None), answer=answer, is_correct=is_correct)
+    response = Response.objects.create(question=question, user_id=request.session.get('user_id', None), answer=answer)
 
     context = {
-        'is_correct': is_correct,
+        'is_correct': response.is_correct,
         'previous_question': current_question
     }
 
