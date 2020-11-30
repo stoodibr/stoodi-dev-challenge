@@ -18,7 +18,6 @@ class SubscriptionView(TemplateView):
         return render(request, 'private_area/subscription_confirmation.html', context={'username': user.username})
 
 
-# Create your views here.
 class LoginView(TemplateView):
     def get(self, request):
         return render(request, 'private_area/login.html')
