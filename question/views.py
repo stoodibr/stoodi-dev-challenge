@@ -1,11 +1,12 @@
 #coding: utf8
+import collections
+
 from django.shortcuts import render
 
 
 def question(request):
     text = 'Quanto é 2^5?'
 
-    # BUG: as respostas estão ficando fora de ordem
     answers = {
         'a': '0',
         'b': '2',
@@ -13,10 +14,11 @@ def question(request):
         'd': '32',
         'e': '128',
     }
+    sorted_answers = collections.OrderedDict(sorted(answers.items()))
 
     context = {
         'question_text': text,
-        'answers': answers,
+        'answers': sorted_answers,
     }
 
     return render(request, 'question/question.html', context=context)
