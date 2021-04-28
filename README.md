@@ -10,20 +10,16 @@ múltipla escolha, ao respondê-la o usuário recebe um feedback de acerto ou er
 
 
 ## Para participar desta parte do processo você deve:
-1. Fazer um fork deste projeto;
-2. Criar um repositório FECHADO(private) na sua conta do github;
-3. Colocar o seu nome e email no topo deste arquivo README do seu
-   repositório;
-4. Desenvolver as histórias pedidas abaixo no seu repositório. De preferência,
-   com pelo menos um commit na finalização de cada história;
-5. Ao terminar o desenvolvimento, dê acesso de leitura ao usuário
-   brunogfranca(brunogomesfranca@gmail.com) ao seu repositório.
-
+- Clonar esse repositório;
+- Criar uma branch com o nome observando o padrão `desafio-nome-sobrenome` (por exemplo: `desafio-maria-silva`);
+- Desenvolver as histórias abaixo na branch que você criou, de preferência com pelo menos um commit na finalização de cada história;
+- Colocar no arquivo Readme: seu nome, email e outras observações que julgar adequadas;
+- Ao terminar o desenvolvimento, abra um pull request para a branch `master`. Se não tiver permissão, nos informe seu usuário do Github;
+- Nos avise por email quando concluir.
 
 ## Considerações:
 - Se não for possível fazer todas as histórias, entregue apenas as histórias que você fez.
 - Você será avaliado tanto pelas funcionalidade do seu código quanto pela utilização de boas práticas, desenvolva como se fosse um código de produção em um time e não uma prova ou script.
-- Cuidado para não deixar o seu repositório público!
 - Neste teste vamos focar apenas nas funcionalidades. A apresentação do site não contará pontos.
 - O usuário admin do sistema django é user:admin/senha:admin.
 - Se você usa docker, basta rodar `make build && make up` para ter o projeto rodando em http://localhost:8000/
