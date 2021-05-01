@@ -1,6 +1,6 @@
-#coding: utf8
+# coding: utf8
 
-from django.urls import path, re_path
+from django.urls import re_path
 
 from question.views import Question
 
