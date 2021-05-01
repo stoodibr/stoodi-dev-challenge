@@ -13,7 +13,14 @@
 
     <br/>
     <br/>
-    <a href="{% url 'question' %}">Tente novamente</a>
-
+    <a href="{% url 'question' %}?page={{ question.number }}">Tente novamente</a>
+    <br/>
+    <br/>
+    {% if question.has_next %}
+        <a href="{% url 'question' %}?page={{ question.next_page_number }}">Próxima questão</a>
+    {% else %}
+        <a href="{% url 'question' %}">Próxima questão</a>
+    {% endif %}
+    <br/>
     </body>
 </html>

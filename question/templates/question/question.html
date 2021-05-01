@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Questão 1</title>
+        <title>Questão {{ page }}</title>
     </head>
 
     <body>
         <form action="{% url 'question_answer' %}" method="POST">
             {% csrf_token %}
-            <p>{{ question_text}}</p>
-
-            {% for letter, value in answers.items %}
-                <input type="radio" name="answer" value="{{ letter }}"><b>{{ letter }}.</b> {{ value }}</input><br/>
+            {% for q in question %}
+                <p>{{ q.question_text }}</p>
+                {% for letter, value in q.answers.items %}
+                    <input type="radio" name="answer" value="{{ letter }}"><b>{{ letter }}.</b> {{ value }}</input><br/>
+                {% endfor %}
+                <br/>
+                <input type="submit" value="Ok" />
             {% endfor %}
-
-            <br/>
-            <input type="submit" value="Ok" />
         </form>
     </body>
 </html>
