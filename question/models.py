@@ -3,7 +3,7 @@ from django.db import models
 
 class Question(models.Model):
     text = models.CharField(max_length=100)
-    correct_answer = models.ForeignKey('Answer', on_delete=models.CASCADE)
+    correct_answer = models.ForeignKey('Answer', on_delete=models.CASCADE, null=True)
 
 
 class Answer(models.Model):

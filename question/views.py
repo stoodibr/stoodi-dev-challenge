@@ -1,8 +1,9 @@
-#coding: utf8
+# coding: utf8
 import collections
 
 from django.shortcuts import render
 from django.core.paginator import Paginator
+from django.core.exceptions import ObjectDoesNotExist
 
 from question.models import Answer as AnswerModel, Question as QuestionModel
 
@@ -11,7 +12,6 @@ class Question:
 
     def __init__(self):
         self.set_questions_list()
-
 
     def set_questions_list(self):
         q = QuestionModel.objects.all().values()
@@ -25,16 +25,18 @@ class Question:
             sorted_answers = collections.OrderedDict(sorted(answers.items()))
 
             correct_answer_id = question.get('correct_answer_id')
-            correct_answer = AnswerModel.objects.filter(id=correct_answer_id).values()[0]
+            try:
+                correct_answer = AnswerModel.objects.filter(id=correct_answer_id).values()[0]
+            except IndexError:
+                raise ObjectDoesNotExist("This question does not have a correct answer")
 
             questions_list.append({
                 'question_text': question.get('text'),
                 'correct_answer': correct_answer,
                 'answers': sorted_answers,
             })
-        
-        self.paginator = Paginator(questions_list, 1)
 
+        self.paginator = Paginator(questions_list, 1)
 
     def question(self, request):
         self.page = request.GET.get('page') or 1
@@ -46,7 +48,6 @@ class Question:
         }
 
         return render(request, 'question/question.html', context=context)
-
 
     def question_answer(self, request):
         answer = request.POST.get('answer', 'z')
