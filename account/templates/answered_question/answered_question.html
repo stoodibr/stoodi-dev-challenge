@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Questão {{ page }}</title>
+    </head>
+
+    <body>
+        {% if user %}
+            {% if questions %}
+                {% for q in questions %}
+                    {{ q }}
+                    <br/>
+                {% endfor %}
+            {% else %}
+                Não há questões respondidas por este usuário.
+            {% endif %}
+        {% else %}
+            Você precisa estar logado para acessar esta página.
+        {% endif %}
+    </body>
+</html>
