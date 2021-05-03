@@ -27,6 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+LOGIN_REDIRECT_URL = '/'
 
 # Application definition
 
@@ -39,6 +40,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
 
     'question',
+    'account',
 )
 
 MIDDLEWARE = (
@@ -62,7 +64,7 @@ ROOT_URLCONF = 'selecao.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [f'{BASE_DIR}/question/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
