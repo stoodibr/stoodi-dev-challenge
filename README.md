@@ -64,3 +64,12 @@ questão do banco.
 - História 8:
   - Para usuário logados, crie uma página com o log de todas as questões feitas pelo usuário em "/log-questoes/".
 
+
+## *** RESOLUÇÂO ***
+
+Nome: Fernanda Merli
+E-mail: fermerli.97@gmail.com
+
+- Para ter o projeto rodando em http://localhost:8000/, basta rodar `make build && make up`
+- Para fazer login no sistema, acesse http://localhost:8000/login/ e preencha os campos de usuário e senha. Caso ainda não tenha cadastro, acesse http://localhost:8000/cadastro/. Para encerrar a sessão, acesse http://localhost:8000/logout/
+- Para rodar os testes, executar `make cmd`. Em seguida, no bash, entrar no repositório /question através do comando `cd question` e rodar `pytest`. Ao final, será criada uma pasta para a cobertura dos testes, nomeada `htmlcov`
