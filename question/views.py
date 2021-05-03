@@ -82,5 +82,5 @@ class Question:
             'question': question
         }
 
-        logger.info({'question_id': question_id, 'answer_choice': answer, 'is_correct': is_correct})
+        logger.info({'user': request.user.username, 'question_id': question_id, 'answer_choice': answer, 'is_correct': is_correct})
         return render(request, 'question/answer.html', context=context)
