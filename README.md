@@ -64,3 +64,14 @@ questão do banco.
 - História 8:
   - Para usuário logados, crie uma página com o log de todas as questões feitas pelo usuário em "/log-questoes/".
 
+## Dados:
+- Nome: Gabriel Franchi Rufino
+- Email: gabriel.franchi.gf@gmail.com
+
+## OBS:
+- Para rodar o projeto, digite python manage.py runserver na pasta raiz
+- Para rodar os testes python manage.py test question.tests
+- Para se cadastrar, acesse http://localhost:8080/cadastro
+- Para fazer login, acesse http://localhost:8080/login
+- Para fazer logout, acesse http://localhost:8080/logout
+- Para verificar os logs do seu usuário, acesse http://localhost:8080/log-questoes
