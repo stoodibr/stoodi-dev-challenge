@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro</title>
+</head>
+<body>
+    {% load crispy_forms_tags %}
+    <div>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <div>
+                <br>
+                <button type="submit">
+                    Cadastrar
+                </button>
+            </div>
+        </form>
+        <div>
+            <small>
+                Já possui cadastro? <a href="{% url 'login' %}"> Login</a>
+            </small>
+        </div>
+    </div>
+</body>
+</html>

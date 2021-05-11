@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+    {% load crispy_forms_tags %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    <div>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <div>
+                <br>
+                <button type="submit">
+                    Login
+                </button>
+            </div>
+        </form>
+        <div>
+            <small>
+                Não possui cadastro? <a href="{% url 'register' %}"> Cadastre-se</a>
+            </small>
+        </div>
+    </div>
+</body>
+</html>
