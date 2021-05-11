@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Logs do usuário</title>
+</head>
+<body>
+    {% if user.is_authenticated %}
+        {% if logs %}
+            {% for log in logs %}
+                {{ log }}
+                <br>
+            {% endfor %}
+        {% else %}
+            <h3>Você não tem questões respondidas.</h3>
+            <br>
+            <a href="{% url 'question' %}">Responder questões</a>
+        {% endif %}
+    {% else %}
+        <h3>Você não está logado.</h3>
+        <br>
+        <a href="{% url 'login' %}">Login</a>
+    {% endif %}
+</body>
+</html>
