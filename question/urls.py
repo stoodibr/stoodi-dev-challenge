@@ -1,11 +1,10 @@
-#coding: utf8
+from django.urls import path
+from.views import QuestionView
 
-from django.urls import path, re_path
-
-from . import views
+question_view = QuestionView()
 
 urlpatterns = [
-    re_path(r'^$', views.question, name='question'),
-    re_path(r'^resposta/$', views.question_answer, name='question_answer'),
+    path('', question_view.question, name='question'),
+    path('resposta/', question_view.question_answer, name='question_answer'),
 
 ]

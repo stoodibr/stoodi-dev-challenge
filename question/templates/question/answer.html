@@ -3,17 +3,19 @@
     <head>
         <title>Resposta</title>
     </head>
-
     <body>
     {% if is_correct %}
         Resposta correta!
     {% else %}
         Resposta errada!
     {% endif %}
-
     <br/>
+    <a href="{% url 'question' %}?page={{ page.number}}">Tente novamente</a>
     <br/>
-    <a href="{% url 'question' %}">Tente novamente</a>
-
+    {% if page.has_next %}
+        <a href="{% url 'question' %}?page={{page.next_page_number}}">Próxima Questão</a>
+    {% else %}
+        <a href="{% url 'question' %}">Primeira Questão</a>
+    {% endif %}
     </body>
 </html>
