@@ -29,6 +29,12 @@ class TestQuestionChoiceModel(TestCase):
             text=cls.text,
         )
 
+        pergunta = {
+            "text": '2+2 eh ?',
+            "correct_answer": 'C',
+            "answers": ['1','3','4']
+        }
+
         cls.answers = [
             QuestionChoice.objects.create(
                 question=cls.question,

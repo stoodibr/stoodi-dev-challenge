@@ -1,21 +1,26 @@
 #coding: utf8
 from django.shortcuts import render
+from rest_framework import serializers, status
+from rest_framework.generics import GenericAPIView
+from rest_framework.response import Response
+
+from .models import Question
+from .serializers import QuestionCreateSerializer, QuestionRetrieveSerializer
+
+import pdb
 
 
 def question(request):
-    text = 'Quanto é 2^5?'
+    
+    data = Question.objects.all().first()
+    question = QuestionRetrieveSerializer(data)
+    answers = {}
 
-    # BUG: as respostas estão ficando fora de ordem
-    answers = {
-        'a': '0',
-        'b': '2',
-        'c': '16',
-        'd': '32',
-        'e': '128',
-    }
+    for answer in question.data["answers"]:
+        answers[answer["label"].lower()] = answer["text"]
 
     context = {
-        'question_text': text,
+        'question_text': question.data["text"],
         'answers': answers,
     }
 
@@ -30,3 +35,18 @@ def question_answer(request):
     }
 
     return render(request, 'question/answer.html', context=context)
+
+class QuestionCreateView(GenericAPIView):
+    queryset = Question.objects.all()
+    serializer_class = QuestionCreateSerializer
+
+    def post(self, request):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        new_question = serializer.create(serializer.data)
+
+        question = Question.objects.get(id=new_question.id)
+        pdb.set_trace()
+
+        new_question = QuestionRetrieveSerializer(question)
+        return Response(new_question.data, status=status.HTTP_201_CREATED)
