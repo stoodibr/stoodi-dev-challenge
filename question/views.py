@@ -22,13 +22,15 @@ def question(request):
     context = {
         'question_text': question.data["text"],
         'answers': answers,
+        'id': data.id
     }
 
     return render(request, 'question/question.html', context=context)
 
-def question_answer(request):
+def question_answer(request, id):
     answer = request.POST.get('answer', 'z')
-    is_correct = answer == 'd'
+    question = Question.objects.get(id=id)
+    is_correct = answer == question.correct_answer.label.lower()
 
     context = {
         'is_correct': is_correct,

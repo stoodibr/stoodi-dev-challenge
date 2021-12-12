@@ -5,7 +5,7 @@
     </head>
 
     <body>
-        <form action="{% url 'question_answer' %}" method="POST">
+        <form action="{% url 'question_answer' id %}" method="POST">
             {% csrf_token %}
             <p>{{ question_text}}</p>
 
