@@ -10,9 +10,16 @@ from .serializers import QuestionCreateSerializer, QuestionRetrieveSerializer
 import pdb
 
 
-def question(request):
+def question(request, id="1"):
     
-    data = Question.objects.all().first()
+    data_list = Question.objects.all().filter(id__gte=id).order_by("id")
+    data = data_list.first()
+
+    if len(data_list) > 1:
+        next_id = data_list[1].id
+    else:
+        next_id = Question.objects.all().order_by("id").first().id
+    
     question = QuestionRetrieveSerializer(data)
     answers = {}
 
@@ -22,7 +29,8 @@ def question(request):
     context = {
         'question_text': question.data["text"],
         'answers': answers,
-        'id': data.id
+        'id': data.id,
+        'next_id': str(next_id) if next_id != id else None
     }
 
     return render(request, 'question/question.html', context=context)

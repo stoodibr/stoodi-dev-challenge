@@ -16,5 +16,11 @@
             <br/>
             <input type="submit" value="Ok" />
         </form>
+        <br/>
+        {% if next_id %}
+            <a href="{% url 'question_by_id' next_id %}">Next question</a>
+        {% endif %}
+        
+        
     </body>
 </html>
