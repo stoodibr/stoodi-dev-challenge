@@ -20,6 +20,15 @@
         {% if next_id %}
             <a href="{% url 'question_by_id' next_id %}">Next question</a>
         {% endif %}
+        <br />
+        <a href="{% url 'login' %}">login</a>
+        <br />
+        <a href="{% url 'register' %}">register</a>
+        {% if request.user.is_authenticated %}
+            <br />
+            <a href="{% url 'logout' %}">Logout</a>
+        {% endif %}
+
         
         
     </body>
