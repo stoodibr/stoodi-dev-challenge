@@ -40,8 +40,8 @@ def question_answer(request, id):
     answer = request.POST.get('answer', 'z')
     question = Question.objects.get(id=id)
     is_correct = answer == question.correct_answer.label.lower()
-
-    QuestionRecords.objects.create(question=question, answered=answer)
+    user = request.user if request.user.is_authenticated else None
+    QuestionRecords.objects.create(question=question, answered=answer, user=user)
 
     context = {
         'is_correct': is_correct,

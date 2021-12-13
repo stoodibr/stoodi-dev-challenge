@@ -1,5 +1,7 @@
 from django.db import models
+from django.db.models.deletion import CASCADE
 from django.utils import timezone
+from django.contrib.auth.models import User
 
 
 class Question(models.Model):
@@ -18,6 +20,8 @@ class QuestionRecords(models.Model):
     created_at = models.DateTimeField()
     answered = models.CharField(max_length=1)
     is_correct_answered = models.BooleanField()
+    user = models.ForeignKey(User, on_delete=CASCADE, default=None, null=True)
+
 
     def save(self, *args, **kwargs):
         self.created_at = timezone.now()
