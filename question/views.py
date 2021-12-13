@@ -4,7 +4,7 @@ from rest_framework import serializers, status
 from rest_framework.generics import GenericAPIView
 from rest_framework.response import Response
 
-from .models import Question
+from .models import Question, QuestionRecords
 from .serializers import QuestionCreateSerializer, QuestionRetrieveSerializer
 
 import pdb
@@ -35,16 +35,20 @@ def question(request, id="1"):
 
     return render(request, 'question/question.html', context=context)
 
+
 def question_answer(request, id):
     answer = request.POST.get('answer', 'z')
     question = Question.objects.get(id=id)
     is_correct = answer == question.correct_answer.label.lower()
+
+    QuestionRecords.objects.create(question=question, answered=answer)
 
     context = {
         'is_correct': is_correct,
     }
 
     return render(request, 'question/answer.html', context=context)
+
 
 class QuestionCreateView(GenericAPIView):
     queryset = Question.objects.all()
