@@ -8,8 +8,6 @@ from rest_framework.response import Response
 from .models import Question, QuestionRecords
 from .serializers import QuestionCreateSerializer, QuestionRetrieveSerializer
 
-import pdb
-
 
 def question(request, id="1"):
     
@@ -57,7 +55,6 @@ def question_logs(request):
     context = {
         "answers": list(answers)
     }
-    print(context)
     return render(request, 'question/question_logs.html', context=context)
 
 
@@ -71,7 +68,6 @@ class QuestionCreateView(GenericAPIView):
         new_question = serializer.create(serializer.data)
 
         question = Question.objects.get(id=new_question.id)
-        pdb.set_trace()
 
         new_question = QuestionRetrieveSerializer(question)
         return Response(new_question.data, status=status.HTTP_201_CREATED)

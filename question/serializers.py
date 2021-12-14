@@ -1,7 +1,6 @@
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 from .models import Question, QuestionChoice
-import pdb
 
 class QuestionChoiceSerializer(serializers.ModelSerializer):
     class Meta:

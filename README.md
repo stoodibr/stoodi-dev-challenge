@@ -1,5 +1,9 @@
 # PROCESSO DE SELEÇÃO DE PESSOA DESENVOLVEDORA
 
+## Meus dados:
+- nome: Luciano Feder
+- email: lucianoo.feder@gmail.com
+
 Se você não tem experiência com o Django, recomendamos que você faça pelo menos
 este tutorial antes de começar:
 https://docs.djangoproject.com/en/3.1/intro/tutorial01/
