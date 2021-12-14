@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 
 
 class Question(models.Model):
-    text = models.TextField()
+    text = models.TextField(unique=True)
     correct_answer = models.OneToOneField('question.QuestionChoice', on_delete=models.CASCADE, related_name="answers_question", null=True)
 
 
