@@ -1,0 +1,14 @@
+<ul>
+    {% for answer in answers %}
+        <li>Question: "{{ answer.question.text }}"<b>
+            {% if answer.is_correct_answered %}
+                Correct
+            {% else %}
+                Incorrect
+            {% endif %}
+        </b>answered option <b>{{ answer.answered.upper }}</b> at {{ answer.created_at }} UTC</li>
+    {% endfor %}
+
+    <br />
+    <a href="{% url 'question' %}">Home</a>
+</ul>

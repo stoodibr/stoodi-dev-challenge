@@ -7,7 +7,7 @@
     <body>
         <form action="{% url 'question_answer' id %}" method="POST">
             {% csrf_token %}
-            <p>{{ question_text}}</p>
+            <p>{{ question_text }}</p>
 
             {% for letter, value in answers.items %}
                 <input type="radio" name="answer" value="{{ letter }}"><b>{{ letter }}.</b> {{ value }}</input><br/>
@@ -27,6 +27,8 @@
         {% if request.user.is_authenticated %}
             <br />
             <a href="{% url 'logout' %}">Logout</a>
+            <br />
+            <a href="{% url 'question_logs' %}">Question Logs</a>
         {% endif %}
 
         

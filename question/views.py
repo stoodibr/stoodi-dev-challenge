@@ -1,6 +1,7 @@
 #coding: utf8
 from django.shortcuts import render
-from rest_framework import serializers, status
+from django.contrib.auth.decorators import login_required
+from rest_framework import status
 from rest_framework.generics import GenericAPIView
 from rest_framework.response import Response
 
@@ -48,6 +49,16 @@ def question_answer(request, id):
     }
 
     return render(request, 'question/answer.html', context=context)
+
+
+@login_required(login_url='login')
+def question_logs(request):
+    answers = QuestionRecords.objects.filter(user=request.user).all()
+    context = {
+        "answers": list(answers)
+    }
+    print(context)
+    return render(request, 'question/question_logs.html', context=context)
 
 
 class QuestionCreateView(GenericAPIView):
