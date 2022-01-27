@@ -2,7 +2,7 @@
 from django.shortcuts import render
 import collections
 
-# ordena o dict de respostas mantendo os valores originais
+# ordena o dict de respostas mantendo os valores originais em cada alternativa
 def ordered_answers(answers):
     ordered_items = collections.OrderedDict(sorted(answers.items()))
     ordered_list = []
