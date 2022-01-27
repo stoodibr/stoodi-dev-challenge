@@ -32,7 +32,7 @@ class TestQuestionView(TestCase):
 
 class QuestionModelTest(TestCase):
 	@classmethod
-	def setUpClassData(cls):
+	def setUpTestData(cls):
 		# timezone ex: <class 'datetime'> 2022-01-26 19:14:51.076158+00:00
 		time = timezone.now()
 		Question.objects.create(question_text='Quanto é 2+2?', pub_date=time)
@@ -40,5 +40,5 @@ class QuestionModelTest(TestCase):
 	def test_model_content_question_text(self):
 		question = Question.objects.get(id=1)
 		field_label = question._meta.get_field('question_text').verbose_name
-		self.assertEquals(field_label, 'question_text')
+		self.assertEquals(field_label, 'question text')
 
