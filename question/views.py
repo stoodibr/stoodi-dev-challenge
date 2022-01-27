@@ -2,6 +2,8 @@
 from django.shortcuts import render
 import collections
 
+from .models import Question
+
 # ordena o dict de respostas mantendo os valores originais em cada alternativa
 def ordered_answers(answers):
     ordered_items = collections.OrderedDict(sorted(answers.items()))
@@ -22,20 +24,31 @@ def check_order(answers):
 
 
 def question(request):
-    text = 'Quanto é 2^5?'
+    # text = 'Quanto é 2^5?'
 
     # BUG: as respostas estão ficando fora de ordem
+    # answers = {
+    #     'a': '0',
+    #     'b': '2',
+    #     'c': '16',
+    #     'd': '32',
+    #     'e': '128',
+    # }
+    questions = Question.objects.all()
+    current_question = questions[0]
+    
     answers = {
-        'a': '0',
-        'b': '2',
-        'c': '16',
-        'd': '32',
-        'e': '128',
+        'a': current_question.option_a,
+        'b': current_question.option_b,
+        'c': current_question.option_c,
+        'd': current_question.option_d,
+        'e': current_question.option_e,
     }
+
     checked_answers = check_order(answers)
 
     context = {
-        'question_text': text,
+        'question_text': current_question.question_text,
         'answers': checked_answers,
     }
 
