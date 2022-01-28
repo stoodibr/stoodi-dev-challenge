@@ -3,12 +3,12 @@ from django.db import models
 
 class Question(models.Model):
 	answers_option = [
-    ('A', 'a'),
-    ('B', 'b'),
-    ('C', 'c'),
-	('D', 'd'),
-	('E', 'e'),
-]
+    ('a', 'a'),
+    ('b', 'b'),
+    ('c', 'c'),
+		('d', 'd'),
+		('e', 'e'),
+	]
 	question_text = models.CharField(max_length=200)
 	pub_date = models.DateField('date published')
 	option_a = models.CharField(max_length=100, default='option' )

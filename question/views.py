@@ -50,13 +50,16 @@ def question(request):
     context = {
         'question_text': current_question.question_text,
         'answers': checked_answers,
+        'correct_answer': current_question.correct_answer
     }
 
     return render(request, 'question/question.html', context=context)
 
 def question_answer(request):
-    answer = request.POST.get('answer', 'z')
-    is_correct = answer == 'd'
+    correct = Question.objects.all()[0].correct_answer
+
+    answer = request.POST.get('answer')
+    is_correct = answer == correct
 
     context = {
         'is_correct': is_correct,
