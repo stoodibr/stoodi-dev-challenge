@@ -68,6 +68,10 @@ class TestAnswerView(TestCase):
 		response = Client().get(reverse('question:question_answer'))
 		self.assertContains(response, 'Resposta errada!')
 
+	# def test_answer_view_correct_answer(self):
+	# 	response_post =Client().post('question:question_answer', data=correct_answer)
+	# 	self.assertContains(response_post, 'Resposta correta!')
+
 class QuestionModelTest(TestCase):
 	@classmethod
 	def setUpTestData(cls):
