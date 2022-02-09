@@ -64,3 +64,9 @@ questão do banco.
 - História 8:
   - Para usuário logados, crie uma página com o log de todas as questões feitas pelo usuário em "/log-questoes/".
 
+### Nome:
+Alexandre Lopes
+
+### Email:
+criabiobr@gmail.com
+
