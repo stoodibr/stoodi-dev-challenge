@@ -6,14 +6,25 @@
 
     <body>
     {% if is_correct %}
-        Resposta correta!
+        {% if questions.has_next %}
+            Resposta correta!
+            <br/>
+            <a href="http://127.0.0.1:8000/?question={{ questions.next_page_number }}">next</a>
+
+            {% else %}
+            Parabéns, você venceu! volte a primeira questão.
+            <br/>
+            <a href="http://127.0.0.1:8000/">clique aqui</a>
+        {% endif %}
+
     {% else %}
         Resposta errada!
+        
+        <a href="http://127.0.0.1:8000/?question={{ questions.number }}">Tente novamente</a>
     {% endif %}
 
     <br/>
     <br/>
-    <a href="{% url 'question' %}">Tente novamente</a>
 
     </body>
 </html>
