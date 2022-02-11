@@ -1,7 +1,7 @@
 # coding: utf8
 from django.shortcuts import render
 from django.core.paginator import Paginator
-from .models import Question, Answer
+from .models import Question, Answer, QuestionAnswered
 
 
 def question(request):
@@ -27,6 +27,8 @@ def question_answer(request):
         'questions': question_answer_pagination(current_page)
     }
 
+    save_answer(answer)
+
     return render(request, 'question/answer.html', context=context)
 
 
@@ -45,3 +47,14 @@ def question_answer_pagination(current_page):
     questions = paginator.get_page(current_page)
 
     return questions
+
+
+def save_answer(answer):
+    is_correct = answer[0]
+    question_id = answer[2]
+    answer_id = answer[3]
+
+    QuestionAnswered.objects.create(
+        question=Question.objects.get(id=question_id),
+        answer=Answer.objects.get(id=answer_id),
+        is_correct=is_correct)

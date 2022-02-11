@@ -12,7 +12,7 @@
                 
                 {% for answer in answers %}                
                     {% if answer.question == question %}
-                        <input type="radio" name="answer" value={{ answer.is_correct }},{{ questions.number }}><b>A.</b> {{ answer.answer_text }}</input><br/>
+                        <input type="radio" name="answer" value={{ answer.is_correct }},{{ questions.number }},{{question.id}},{{answer.id}}><b>A.</b> {{ answer.answer_text }}</input><br/>
                     {% endif %}
                 {% endfor %}
             {% endfor %}
