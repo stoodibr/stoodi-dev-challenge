@@ -43,9 +43,9 @@ def login(request):
 
     if not user:
         return render(request, 'accounts/login.html')
-
-    auth.login(request, user)
-    return redirect('log_questions')
+    else:
+        auth.login(request, user)
+        return redirect('log_questions')
 
 
 def logout(request):
@@ -53,7 +53,7 @@ def logout(request):
     return redirect('login')
 
 
-@login_required(redirect_field_name='login')
+@login_required(login_url='login')
 def log_questions(request):
     user = request.user
 
