@@ -10,7 +10,13 @@
         {% for question in questions_ansered %}                
             <p>Questão: {{ question.question }}</p>
             <p>Resposta: {{ question.answer.answer_text }}</p>
-            <p>Acertou? {{ question.is_correct }}</p>
+            <p>Acertou?
+                {% if question.is_correct %}
+                    <span style="color:green">Sim</span>
+                {% else %}
+                    <span style="color:red">Não</span>
+                {% endif %}
+            </p>
             <p>data: {{ question.created_at }}</p>
             <hr>
         {% endfor %}
