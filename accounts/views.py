@@ -49,7 +49,8 @@ def login(request):
 
 
 def logout(request):
-    return render(request, 'accounts/logout.html')
+    auth.logout(request)
+    return redirect('login')
 
 
 @login_required(redirect_field_name='login')

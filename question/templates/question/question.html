@@ -9,11 +9,18 @@
         <form action="{% url 'question_answer' %}" method="POST">
             {% csrf_token %}
             {% for question in questions %}
-                <p>{{ question }}</p>                
+                <p>{{ question }}</p>
                 
-                {% for answer in answers %}                
+                
+                {% for answer in answers %}
                     {% if answer.question == question %}
-                        <input type="radio" name="answer" value={{ answer.is_correct }},{{ questions.number }},{{question.id}},{{answer.id}}><b>A.</b> {{ answer.answer_text }}</input><br/>
+                            <input 
+                                type="radio"
+                                name="answer"
+                                value={{ answer.is_correct }},{{ questions.number }},{{question.id}},{{answer.id}}>
+                                {{ answer.answer_text }}
+                            </input>
+                            <br/>
                     {% endif %}
                 {% endfor %}
             {% endfor %}

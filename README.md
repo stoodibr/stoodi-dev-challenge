@@ -65,8 +65,16 @@ questão do banco.
   - Para usuário logados, crie uma página com o log de todas as questões feitas pelo usuário em "/log-questoes/".
 
 ### Nome:
-Alexandre Lopes
+>Alexandre Lopes
 
 ### Email:
-criabiobr@gmail.com
+>criabiobr@gmail.com
+
+### caminhos: 
+>/  
+>/conta/  
+>/conta/login/  
+>/conta/logout/  
+>/conta/cadastro/  
+>/conta/log-questoes/
 
