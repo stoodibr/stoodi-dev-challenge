@@ -27,7 +27,7 @@ def question_answer(request):
         'questions': question_answer_pagination(current_page)
     }
 
-    save_answer(answer)
+    save_answer(request, answer)
 
     return render(request, 'question/answer.html', context=context)
 
@@ -49,7 +49,7 @@ def question_answer_pagination(current_page):
     return questions
 
 
-def save_answer(answer):
+def save_answer(request, answer):
     is_correct = answer[0]
     question_id = answer[2]
     answer_id = answer[3]
@@ -57,4 +57,5 @@ def save_answer(answer):
     QuestionAnswered.objects.create(
         question=Question.objects.get(id=question_id),
         answer=Answer.objects.get(id=answer_id),
-        is_correct=is_correct)
+        is_correct=is_correct,
+        user=request.user)

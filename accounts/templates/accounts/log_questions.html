@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Lod de Questões</title>
+    </head>
+
+    <body>
+        <h1>Bem vindo {{ user.username }}</h1>               
+        
+        {% for question in questions_ansered %}                
+            <p>Questão: {{ question.question }}</p>
+            <p>Resposta: {{ question.answer.answer_text }}</p>
+            <p>Acertou? {{ question.is_correct }}</p>
+            <p>data: {{ question.created_at }}</p>
+            <hr>
+        {% endfor %}
+    </body>
+</html>

@@ -53,6 +53,11 @@ def logout(request):
 
 
 @login_required(redirect_field_name='login')
-def dashboard(request):
+def log_questions(request):
+    user = request.user
 
-    return render(request, 'accounts/dashboard.html')
+    context = {
+        'questions_ansered': QuestionAnswered.objects.filter(user=user).order_by('-created_at'),
+    }
+
+    return render(request, 'accounts/log_questions.html', context=context)
