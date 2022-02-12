@@ -45,7 +45,7 @@ def login(request):
         return render(request, 'accounts/login.html')
 
     auth.login(request, user)
-    return redirect('dashboard')
+    return redirect('log_questions')
 
 
 def logout(request):
