@@ -54,8 +54,13 @@ def save_answer(request, answer):
     question_id = answer[2]
     answer_id = answer[3]
 
+    if request.user.is_authenticated:
+        user = request.user
+    else:
+        user = None
+
     QuestionAnswered.objects.create(
         question=Question.objects.get(id=question_id),
         answer=Answer.objects.get(id=answer_id),
         is_correct=is_correct,
-        user=request.user)
+        user=user)

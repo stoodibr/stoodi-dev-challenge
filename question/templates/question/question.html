@@ -4,8 +4,7 @@
         <title>Questão {{ questions.number }}</title>
     </head>
 
-    <body>
-        {{ user.username }}
+    <body>        
         <form action="{% url 'question_answer' %}" method="POST">
             {% csrf_token %}
             {% for question in questions %}
