@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+    <table>
+        <thead>
+            <tr>
+                <th>Pergunta</th>
+                <th>Resposta</th>
+                <th>Acertou?</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for log in logs %}
+                <tr>
+                    <td>{{ log.question_text }}</td>
+                    <td>{{ log.answer_text }}</td>
+                    <td>{{ log.is_correct }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock content %}

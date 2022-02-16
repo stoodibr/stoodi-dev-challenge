@@ -12,9 +12,9 @@
 
     <br/>
     <br/>
-    <a href="/?question_id={{ questions_obj.number }}">Tente novamente</a>
-    {% if questions_obj.has_next %}
-        <a href="/?question_id={{ questions_obj.next_page_number }}">Próxima questão</a>
+    <a href="/?question_id={{ page_obj.number }}">Tente novamente</a>
+    {% if page_obj.has_next %}
+        <a href="/?question_id={{ page_obj.next_page_number }}">Próxima questão</a>
     {% else %}
         <a href="/?question_id=1">Próxima questão</a>
     {% endif %}

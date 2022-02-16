@@ -7,8 +7,8 @@
     <form action="{% url 'question_answer' %}" method="POST">
         {% csrf_token %}
 
-        {% for question in questions_obj %}
-            <p>Pergunta {{ questions_obj.number }} de {{ questions_obj.paginator.num_pages }}</p>
+        {% for question in page_obj %}
+            <p>Pergunta {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</p>
             <h3>{{ question }}</h3>
 
             <ol style="list-style: lower-alpha;">
@@ -16,10 +16,11 @@
                     <li><input type="radio" name="answer" value="{{ answer.id }}" checked>{{ answer.answer_text }}</li>
                 {% endfor %}
             </ol>
+            <input type="hidden" name="question" value="{{ question.id }}">
         {% endfor %}
 
         <br/>
-        <input type="hidden" name="page_number" value="{{ questions_obj.number }}">
+        <input type="hidden" name="page_number" value="{{ page_obj.number }}">
         <input type="submit" value="Ok" />
     </form>
     

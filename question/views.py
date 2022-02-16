@@ -1,37 +1,52 @@
 # coding: utf8
+from django.forms import ModelForm
 from django.shortcuts import render
 from django.core.paginator import Paginator
 
-from .models import Question, Answer
+from .models import Question, Answer, AnswerLog
 
 
 def question(request, template_name='question/pages/question.html'):
     questions = Question.objects.all()
     paginator = Paginator(questions, 1)
-
     page_number = request.GET.get('question_id')
-    questions_obj = paginator.get_page(page_number)
+    page_obj = paginator.get_page(page_number)
 
     context = {
-        'questions_obj': questions_obj
+        'page_obj': page_obj
     }
 
     return render(request, template_name, context)
 
 
 def question_answer(request, template_name='question/pages/answer.html'):
+    question = request.POST.get('question', 'z')
     answer = request.POST.get('answer', 'z')
     page_number = request.POST['page_number']
 
     questions = Question.objects.all()
     paginator = Paginator(questions, 1)
-    questions_obj = paginator.get_page(page_number)
+    page_obj = paginator.get_page(page_number)
 
     is_correct = Answer.objects.get(pk=answer).is_correct
 
+    AnswerLog.objects.create(question_text=Question.objects.get(pk=question),
+                             answer_text=Answer.objects.get(pk=answer).answer_text,
+                             is_correct=is_correct)
+
     context = {
-        'questions_obj': questions_obj,
+        'page_obj': page_obj,
         'is_correct': is_correct,
+    }
+
+    return render(request, template_name, context)
+
+
+def answer_log(request, template_name='question/pages/answer_log.html'):
+    logs = AnswerLog.objects.all()
+
+    context = {
+        'logs': logs
     }
 
     return render(request, template_name, context)
