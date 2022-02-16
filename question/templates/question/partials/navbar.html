@@ -1,6 +1,4 @@
 <nav>
-    <h1>Stoodi</h1>
-
     {% if request.user.is_authenticated %}
         <strong>Você está logado como {{ request.user.username }}</strong>
         <form action="{% url 'logout_user' %}" method="post">

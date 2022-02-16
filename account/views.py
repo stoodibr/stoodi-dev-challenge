@@ -24,7 +24,21 @@ def register_user(request):
         username = request.POST.get('username')
         email = request.POST.get('email')
         password = request.POST.get('password')
+
+        if not username or not email or not password:
+            messages.error(request, "Você precisa preencher todos os campos")
+            return redirect('register_form_view')
+
+        if User.objects.filter(email=email).exists():
+            messages.error(request, "Esse e-mail já está cadastrado!")
+            return redirect('register_form_view')
+
+        if User.objects.filter(username=username).exists():
+            messages.error(request, "Esse nome de usuário já está cadastrado!")
+            return redirect('register_form_view')
+
         User.objects.create_user(username, email, password)
+        messages.success(request, "Conta criada com sucesso, faça login.")
         return redirect('question')
 
 
