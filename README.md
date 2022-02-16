@@ -75,3 +75,4 @@ E-mail: brunorpdev@gmail.com
 ## Commits
 
 - Commit 1: Reorganizando pastas de template, solução das histórias 1, 2 e 3 puxando somente a primeira pergunta.
+- Commit 2: Aplicando paginação nas perguntas com Paginator.

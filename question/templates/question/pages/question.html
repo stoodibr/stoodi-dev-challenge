@@ -6,18 +6,20 @@
 
     <form action="{% url 'question_answer' %}" method="POST">
         {% csrf_token %}
-        <p>{{ question }}</p>
 
-        {% comment %} {% for letter, value in answers.items %}
-            <input type="radio" name="answer" value="{{ letter }}"><b>{{ letter }}.</b> {{ value }}</input><br/>
-        {% endfor %} {% endcomment %}
-        <ol style="list-style-type: lower-alpha;">
-            {% for answer in answers %}
-                <li><input type="radio" name="answer" value="{{ answer.id }}" checked>{{ answer }}</input></li>
-            {% endfor %}
-        </ol>
+        {% for question in questions_obj %}
+            <p>Pergunta {{ questions_obj.number }} de {{ questions_obj.paginator.num_pages }}</p>
+            <h3>{{ question }}</h3>
+
+            <ol style="list-style: lower-alpha;">
+                {% for answer in question.answer_set.all %}
+                    <li><input type="radio" name="answer" value="{{ answer.id }}" checked>{{ answer.answer_text }}</li>
+                {% endfor %}
+            </ol>
+        {% endfor %}
 
         <br/>
+        <input type="hidden" name="page_number" value="{{ questions_obj.number }}">
         <input type="submit" value="Ok" />
     </form>
     
