@@ -1,32 +1,32 @@
-#coding: utf8
+# coding: utf8
 from django.shortcuts import render
 
+from random import shuffle
 
-def question(request):
-    text = 'Quanto é 2^5?'
+from .models import Question, Answer
 
-    # BUG: as respostas estão ficando fora de ordem
-    answers = {
-        'a': '0',
-        'b': '2',
-        'c': '16',
-        'd': '32',
-        'e': '128',
-    }
+
+def question(request, template_name='question/pages/question.html'):
+    question = Question.objects.first()
+
+    answers = list(Answer.objects.filter(question__id=question.id))
+    shuffle(answers)
 
     context = {
-        'question_text': text,
+        'question': question,
         'answers': answers,
     }
 
-    return render(request, 'question/question.html', context=context)
+    return render(request, template_name, context)
 
-def question_answer(request):
+
+def question_answer(request, template_name='question/pages/answer.html'):
     answer = request.POST.get('answer', 'z')
-    is_correct = answer == 'd'
+
+    is_correct = Answer.objects.get(pk=answer).is_correct
 
     context = {
         'is_correct': is_correct,
     }
 
-    return render(request, 'question/answer.html', context=context)
+    return render(request, template_name, context)

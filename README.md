@@ -64,3 +64,14 @@ questão do banco.
 - História 8:
   - Para usuário logados, crie uma página com o log de todas as questões feitas pelo usuário em "/log-questoes/".
 
+---
+
+# Dados pessoais
+
+Nome: Bruno Roberto Pianca
+
+E-mail: brunorpdev@gmail.com
+
+## Commits
+
+- Commit 1: Reorganizando pastas de template, solução das histórias 1, 2 e 3 puxando somente a primeira pergunta.

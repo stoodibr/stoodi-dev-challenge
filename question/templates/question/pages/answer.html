@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    {% include '../partials/navbar.html' %}
+
+    {% if is_correct %}
+        <h4 style="color: green;">Resposta correta!</h4>
+    {% else %}
+        <h4 style="color: red;">Resposta errada!</h4>
+    {% endif %}
+
+    <br/>
+    <br/>
+    <a href="{% url 'question' %}">Tente novamente</a>
+{% endblock content %}

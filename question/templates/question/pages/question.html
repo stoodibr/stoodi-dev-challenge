@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    {% include '../partials/navbar.html' %}
+
+    <form action="{% url 'question_answer' %}" method="POST">
+        {% csrf_token %}
+        <p>{{ question }}</p>
+
+        {% comment %} {% for letter, value in answers.items %}
+            <input type="radio" name="answer" value="{{ letter }}"><b>{{ letter }}.</b> {{ value }}</input><br/>
+        {% endfor %} {% endcomment %}
+        <ol style="list-style-type: lower-alpha;">
+            {% for answer in answers %}
+                <li><input type="radio" name="answer" value="{{ answer.id }}" checked>{{ answer }}</input></li>
+            {% endfor %}
+        </ol>
+
+        <br/>
+        <input type="submit" value="Ok" />
+    </form>
+    
+{% endblock content %}
