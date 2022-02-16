@@ -1,7 +1,7 @@
 # coding: utf8
-from django.forms import ModelForm
 from django.shortcuts import render
 from django.core.paginator import Paginator
+from django.contrib.auth.decorators import login_required
 
 from .models import Question, Answer, AnswerLog
 
@@ -30,9 +30,12 @@ def question_answer(request, template_name='question/pages/answer.html'):
 
     is_correct = Answer.objects.get(pk=answer).is_correct
 
+    user = request.user if request.user.is_authenticated else None
+
     AnswerLog.objects.create(question_text=Question.objects.get(pk=question),
                              answer_text=Answer.objects.get(pk=answer).answer_text,
-                             is_correct=is_correct)
+                             is_correct=is_correct,
+                             user=user)
 
     context = {
         'page_obj': page_obj,
@@ -42,8 +45,9 @@ def question_answer(request, template_name='question/pages/answer.html'):
     return render(request, template_name, context)
 
 
+@login_required(login_url="/login")
 def answer_log(request, template_name='question/pages/answer_log.html'):
-    logs = AnswerLog.objects.all()
+    logs = AnswerLog.objects.filter(user=request.user).order_by('created_at')
 
     context = {
         'logs': logs

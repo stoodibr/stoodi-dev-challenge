@@ -76,3 +76,11 @@ E-mail: brunorpdev@gmail.com
 
 - Commit 1: Reorganizando pastas de template, solução das histórias 1, 2 e 3 puxando somente a primeira pergunta.
 - Commit 2: Aplicando paginação nas perguntas com Paginator.
+- Commit 3: Gerando log de respostas.
+- Commit 4: Sistema de login e cadastro de usuários com Django User Model.
+- Commit 5: Melhorias de validação na lógica de registro de usuário.
+- Commit 6: Armazenando logs para usuário e apresentando apenas logado.
+
+## Observações gerais
+
+- User Model e Paginator aprendi a utilizar durante o teste, pode não estar aplicado da melhor forma.

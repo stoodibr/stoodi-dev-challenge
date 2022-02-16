@@ -13,7 +13,7 @@
                 <tr>
                     <td>{{ log.question_text }}</td>
                     <td>{{ log.answer_text }}</td>
-                    <td>{{ log.is_correct }}</td>
+                    <td>{{ log.is_correct|yesno:"Sim,Não" }}</td>
                 </tr>
             {% endfor %}
         </tbody>

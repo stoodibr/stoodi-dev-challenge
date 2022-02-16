@@ -1,6 +1,7 @@
 <nav>
     {% if request.user.is_authenticated %}
         <strong>Você está logado como {{ request.user.username }}</strong>
+        <a href="{% url 'answer_log' %}">Ver log de respostas</a>
         <form action="{% url 'logout_user' %}" method="post">
             {% csrf_token %}
             <input type="submit" value="Logout">
