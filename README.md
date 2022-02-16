@@ -79,8 +79,9 @@ E-mail: brunorpdev@gmail.com
 - Commit 3: Gerando log de respostas.
 - Commit 4: Sistema de login e cadastro de usuários com Django User Model.
 - Commit 5: Melhorias de validação na lógica de registro de usuário.
-- Commit 6: Armazenando logs para usuário e apresentando apenas logado.
+- Commit 6: Armazenando logs para usuário e apresentando apenas logado, e criação da rota /log-questoes/ para apresentar dados.
 
 ## Observações gerais
 
 - User Model e Paginator aprendi a utilizar durante o teste, pode não estar aplicado da melhor forma.
+- Ainda estudando testes e TDD e por isso não senti confiança em aplicar.
