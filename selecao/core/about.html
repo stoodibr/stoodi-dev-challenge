@@ -1,0 +1,53 @@
+{% extends 'core/base.html' %}
+{% load bootstrap3 %}
+{% load static %}
+
+{% block title %}
+	{% bootstrap_icon 'question-sign' %} Sobre
+{% endblock %}
+
+
+{% block content %}
+	<center>
+	<!-- <img src="{% static 'core/img/logoLasimon.png' %}"
+         class="img-responsive"> -->
+    </center>
+
+	<h3>Projeto em parceria entre Laboratório de Práticas (Ciência da Computação e Sistemas de Informação), Setor de Apoio e Desenvolvimento de Projetos e Inovação (SADEPI)</h3>
+	<h4>Versão:</h4>
+	<ul>
+		<li>1.0 de Dezembro de 2019</li>	
+		<li>1.1 de Março de 2020</li>		
+		<li>1.2 de Maio de 2020</li>	
+	</ul>
+	<h4>Apoio:</h4>
+	<ul>
+		<li>CNPq</li>
+	</ul>
+	<h4>
+		Colaboradores:
+	</h4>
+	<ul> 
+		<li><strong>UFN</strong></li>
+		
+			<ul>
+				<li>Professores:</li>
+				<ul>
+					<li>Alexandre Zamberlan</li>
+					<li>Fernando Prass</li>
+					<li>Reiner Perozzo</li>
+					<li>Sylvio Vieira</li>	
+				</ul>
+				<li>Alunos:</li>
+				<ul>
+					<li>Pierre Fenner</li>
+				</ul>
+			</ul>
+		
+		<li><strong>Parcerias:</strong></li>
+			<ul>
+				<li><a href="http://site.ersistemas.info/" target="_blank"> Empresa ER Sistemas</a> - Robertson Ebling dos Santos (egresso do curso de Sistemas de Informação)</li>
+				<li><a href="https://www.fp2.com.br/" target="_blank">Empresa FP2 Tecnologia</a>
+			</ul>
+	</ul>
+{% endblock %}

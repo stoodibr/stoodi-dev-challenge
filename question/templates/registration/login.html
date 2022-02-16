@@ -1,0 +1,34 @@
+{% extends "registration/base.html" %}
+
+{% load static %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-sm-6 col-md-4 col-md-offset-4">
+
+    <br>login
+    <div class="account-wall">
+      <form action="{% url 'login' %}" class="form-signin" method="POST">
+        {% csrf_token %}
+        <span class="clearfix"></span>
+        <input name="email">
+        <input name="password">
+
+        <p style="text-align:center;">
+          <button type="submit" style="width:100%;" class="btn btn-primary btn-small"
+            href="{% url 'usuario_register' %}">
+            Entrar
+          </button>
+        </p>
+        <p style="text-align:center;">
+          <a class="btn btn-primary" style="width:100%;" href="{% url 'usuario_register' %}">Criar conta</a>
+        </p>
+      </form>
+    </div>
+
+
+  </div>
+</div>
+{% endblock %}

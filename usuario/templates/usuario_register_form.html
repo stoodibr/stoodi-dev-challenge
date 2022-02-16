@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+</head>
+
+<body>
+  {% csrf_token %}
+  <!--Contact form-->
+  <div>
+    <h1>Registrar</h1>
+    <form method="post">
+      {% csrf_token %}
+      {{form}}
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+</body>
+
+</html>

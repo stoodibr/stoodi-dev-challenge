@@ -29,10 +29,21 @@ class Pergunta(models.Model):
     )
 
     data_cadastro = models.DateTimeField(auto_now=True)
-    #opcaos = models.ManyToManyField(Resposta)
     class Meta:
         verbose_name = "Pergunta"
         verbose_name_plural = "Perguntas"
 
     def __str__(self):
         return "%s" % (self.texto)
+class historicoPerguntas(models.Model):
+    pergunta = models.TextField('Texto da questão', null=True)
+    correto = models.BooleanField(default=False)
+    alternativa_escolhida = models.CharField(max_length=50)
+    data_cadastro = models.DateTimeField(auto_now=True)
+    user = models.ForeignKey('usuario.Usuario', blank=True, null=True,  on_delete=models.SET_NULL) 
+    class Meta:
+        verbose_name = "Historico de pergunta"
+        verbose_name_plural = "Historico de perguntas"
+
+    def __str__(self):
+        return "%s - %s" % (self.pergunta,self.data_cadastro )

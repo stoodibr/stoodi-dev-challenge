@@ -1,20 +1,29 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Questão 1</title>
-    </head>
 
-    <body>
-        <form action="{% url 'question_answer' %}" method="POST">
-            {% csrf_token %}
-            <p>{{ question_text}}</p>
+<head>
+    <title>Questão 1</title>
+</head>
 
-            {% for letter, value in answers.items %}
-                <input type="radio" name="answer" value="{{ letter }}"><b>{{ letter }}.</b> {{ value }}</input><br/>
-            {% endfor %}
+<body>
+    <form action="{% url 'question_answer' %}" method="POST">
+        {% csrf_token %}
+        <p>{{ question_text}}</p>
 
-            <br/>
-            <input type="submit" value="Ok" />
-        </form>
-    </body>
+        {% if answers.items %}
+
+        {% for letter, value in answers.items %}
+        <input type="radio" name="answer" value="{{ letter }}"><b>{{ letter }}.</b> {{ value }}</input><br />
+        {% endfor %}
+        {% endif %}
+
+        <input name="pergunta" value="{{ question_text }}">
+        <br />
+        <input type="submit" value="Ok" />
+
+        <a href="{% url 'question'   %}" class="button">next</a>
+
+    </form>
+</body>
+
 </html>

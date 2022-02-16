@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Questão 1</title>
+</head>
+
+{% block content %}
+<table class="table table-hover">
+    <thead>
+        <th>texto</th>
+    </thead>
+
+    <tbody>
+        {% for items in result %}
+        {%for j,k in items%}
+        <tr>
+            <td>{{ j }}</td>
+            <td>{{ k }}</td>
+
+        </tr>
+        {% endfor %}
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
+
+</html>

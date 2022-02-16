@@ -1,0 +1,15 @@
+{% extends "usuario_register_base.html" %}
+
+{% block actions %}
+{% endblock %}
+
+{% block title %}
+Cadastro de usuário
+{% endblock %}
+
+{% block content %}
+<h1>Parabéns, o seu usuário foi cadastrado com sucesso</h1>
+<form action=" {% url 'question' %}" method=" get">
+    <input type="submit" class='btn btn-info' value="Voltar" />
+</form>
+{% endblock %}
