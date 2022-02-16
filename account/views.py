@@ -1,14 +1,7 @@
-from django.forms import ModelForm
 from django.shortcuts import redirect, render
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-
-
-class UserForm(ModelForm):
-    class Meta:
-        model = User
-        fields = ['username', 'email', 'password']
 
 
 def login_form_view(request, template_name='account/pages/login.html'):
