@@ -1,3 +1,18 @@
 <nav>
     <h1>Stoodi</h1>
+
+    {% if request.user.is_authenticated %}
+        <strong>Você está logado como {{ request.user.username }}</strong>
+        <form action="{% url 'logout_user' %}" method="post">
+            {% csrf_token %}
+            <input type="submit" value="Logout">
+        </form>
+    {% else %}
+        <strong>Você não está logado</strong>
+        <ul>
+            <li><a href="{% url 'register_form_view' %}">Criar conta</a></li>
+            <li><a href="{% url 'login_form_view' %}">Fazer Login</a></li>
+        </ul>
+    {% endif %}
+    
 </nav>

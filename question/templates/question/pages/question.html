@@ -4,6 +4,12 @@
 
     {% include '../partials/navbar.html' %}
 
+    {% if messages %}
+        {% for message in messages %}
+            <h4>Mensagem: {{ message }}</h4>    
+        {% endfor %}
+    {% endif %}
+
     <form action="{% url 'question_answer' %}" method="POST">
         {% csrf_token %}
 
