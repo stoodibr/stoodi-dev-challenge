@@ -3,16 +3,16 @@
     <head>
         <title>Questão 1</title>
     </head>
-
+  
     <body>
+        {{error_msg}}
         <form action="{% url 'question_answer' %}" method="POST">
             {% csrf_token %}
-            <p>{{ question_text}}</p>
+            <p>{{ question_text }}</p>
 
-            {% for letter, value in answers.items %}
-                <input type="radio" name="answer" value="{{ letter }}"><b>{{ letter }}.</b> {{ value }}</input><br/>
+            {% for value in answers %}
+                <input type="radio" name="answer" value="{{ value.id }}"><b>{{ value.id }}.</b> {{ value.text }}</input><br/>
             {% endfor %}
-
             <br/>
             <input type="submit" value="Ok" />
         </form>
