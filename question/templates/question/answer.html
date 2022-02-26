@@ -10,10 +10,13 @@
     {% else %}
         Resposta errada!
     {% endif %}
-
+    {{current_question}}
     <br/>
     <br/>
-    <a href="{% url 'question' %}">Tente novamente</a>
+    <a href="{% url 'question_by_id' current_question %}">Tente novamente</a>
+    <br/>
+    <br/>
+    <a href="{% url 'question_by_id' next_question %}">Próxima Questão</a>
 
     </body>
 </html>
