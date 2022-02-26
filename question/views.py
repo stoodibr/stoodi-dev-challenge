@@ -1,6 +1,7 @@
 #coding: utf8
 from django.shortcuts import render
 from .classes.questions_class import *
+from .classes.custom_logs import CustomLogs
 
 def question(request, id = None):
 
@@ -16,10 +17,13 @@ def question(request, id = None):
 def question_answer(request):
    
     try:
+        logger = CustomLogs()
         questions = QuestionsRequest()
         answer, is_correct = request.POST.get('answer', None), False
         if answer:
-            is_correct = questions.get_question_result(answer)
+            is_correct, current_answer_text = questions.get_question_result(answer)
+            
+            logger.add_log( answer= f"{answer} - {current_answer_text}" , is_correct=is_correct)
 
         context = {
             'is_correct': is_correct,
@@ -27,7 +31,7 @@ def question_answer(request):
     
         context['next_question'] = questions.get_next_question_id()
         context['current_question'] = questions.get_current_question()
-    
+           
     except Exception as e:
         context = {
             'error_msg' : str(e)

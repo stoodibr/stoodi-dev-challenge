@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 IS_CORRECT = [(False,'Incorreta'),(True,'Correta')]
 
@@ -25,3 +26,20 @@ class Answer(models.Model):
 
     def __str__(self):
         return self.text
+
+class CustomLogQuestions(models.Model):
+    date = models.DateTimeField(default=timezone.now, verbose_name='Data resposta')
+    selected_answer = models.CharField(max_length=255 , verbose_name='Alternativa escolhida')
+    is_correct = models.CharField(max_length=255, verbose_name='Resposta')
+    # user = models.ForeignKey()
+
+    class Meta:
+        verbose_name = "Custom Log"
+        verbose_name_plural = "Custom Logs"
+        ordering = ['date']
+
+    def __str__(self):
+        return f"{str(self.date)} / {self.selected_answer} / {str(self.is_correct)}"
+
+
+
