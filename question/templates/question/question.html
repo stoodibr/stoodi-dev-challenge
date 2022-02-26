@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Questão 1</title>
+        <title>Questão {{ question.id }}</title>
     </head>
   
     <body>
         {{error_msg}}
         <form action="{% url 'question_answer' %}" method="POST">
             {% csrf_token %}
-            <p>{{ question_text }}</p>
+            <p>{{ question.text }}</p>
 
             {% for value in answers %}
-                <input type="radio" name="answer" value="{{ value.id }}"><b>{{ value.id }}.</b> {{ value.text }}</input><br/>
+                <!-- TODO: colocar letras no campo value -->
+                <input type="radio" name="answer" value="{{ value.id }}" required><b>{{ value.id }}.</b> {{ value.text }}</input><br/>
             {% endfor %}
             <br/>
             <input type="submit" value="Ok" />

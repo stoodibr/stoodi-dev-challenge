@@ -13,7 +13,7 @@ class QuestionsRequest():
     
         if answer_list:
             return {
-                'question_text': question.text,
+                'question': question,
                 'answers': answer_list,
             }
         
@@ -31,10 +31,11 @@ class QuestionsRequest():
             self.__current_answer =  Answer.objects.get(id=id_answer)
             return self.__current_answer.is_correct
     
-    
     def get_current_question(self):
         if self.__current_answer:
             return self.__current_answer.question_id.id
+        
+        return Question.objects.all()[0]
     
     def get_context(self):
         return self.__context
