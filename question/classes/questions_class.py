@@ -1,4 +1,5 @@
 from question.models import Question, Answer
+QUESTION_VISUAL_ID = ['a','b','c','d','e','f','g','h','i','j','k']
 
 class QuestionsRequest():
 
@@ -9,13 +10,22 @@ class QuestionsRequest():
     def __get_questions_context(self, id_question):
 
         question = Question.objects.get(id=id_question) if Question.objects.filter(id=id_question).exists() else Question.objects.all()[0]
-        answer_list = Answer.objects.filter(question_id=question.id)[:5]
-    
-        if answer_list:
+        answer_qry = Answer.objects.filter(question_id=question.id).order_by('id')[:5]
+          
+        if answer_qry:
             return {
                 'question': question,
-                'answers': answer_list,
+                'answers': self.__build_answer_list(answer_qry),
             }
+
+    def __build_answer_list(self, answer_query):
+        answer_list = {}
+        i = 0
+        for item in answer_query:
+            answer_list[QUESTION_VISUAL_ID[i]] = item
+            i += 1
+        
+        return answer_list
         
     def get_next_question_id(self):
         

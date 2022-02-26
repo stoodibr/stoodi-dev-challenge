@@ -9,10 +9,8 @@
         <form action="{% url 'question_answer' %}" method="POST">
             {% csrf_token %}
             <p>{{ question.text }}</p>
-
-            {% for value in answers %}
-                <!-- TODO: colocar letras no campo value -->
-                <input type="radio" name="answer" value="{{ value.id }}" required><b>{{ value.id }}.</b> {{ value.text }}</input><br/>
+            {% for key, value  in answers.items %}
+                <input type="radio" name="answer" value="{{ value.id }}" required><b>{{ key }}.</b> {{ value.text }}</input><br/>
             {% endfor %}
             <br/>
             <input type="submit" value="Ok" />
