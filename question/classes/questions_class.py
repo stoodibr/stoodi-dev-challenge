@@ -28,7 +28,6 @@ class QuestionsRequest():
         return answer_dict
         
     def get_next_question_id(self):
-        
         if self.__current_answer:
             next_question_id = int(self.__current_answer.question_id.id) + 1
             if Question.objects.filter(id=next_question_id).exists():
@@ -45,7 +44,7 @@ class QuestionsRequest():
         if self.__current_answer:
             return self.__current_answer.question_id.id
         
-        return Question.objects.all()[0]
+        return Question.objects.all()[0].id
     
     def get_context(self):
         return self.__context

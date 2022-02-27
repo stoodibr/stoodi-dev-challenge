@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import User
 
 IS_CORRECT = [(False,'Incorreta'),(True,'Correta')]
 
@@ -31,7 +32,7 @@ class CustomLogQuestions(models.Model):
     date = models.DateTimeField(default=timezone.now, verbose_name='Data resposta')
     selected_answer = models.CharField(max_length=255 , verbose_name='Alternativa escolhida')
     is_correct = models.CharField(max_length=255, verbose_name='Resposta')
-    # user = models.ForeignKey()
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, default=None)
 
     class Meta:
         verbose_name = "Custom Log"
@@ -39,7 +40,9 @@ class CustomLogQuestions(models.Model):
         ordering = ['date']
 
     def __str__(self):
-        return f"{str(self.date)} / {self.selected_answer} / {str(self.is_correct)}"
+        user = self.user.first_name if self.user.first_name else self.user
+        is_correct = "Resposta Correta" if self.is_correct else "Resposta Errada"
+        return f"{self.date} - {user}  --  {self.selected_answer}  -- {is_correct}"
 
 
 

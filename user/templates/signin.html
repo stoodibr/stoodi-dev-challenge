@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Informe Email e Senha</title>
+    </head>
+    <body>
+        <div>
+            <ul>
+                {% if campo_vazio %}
+                    <li>
+                        <p>{{campo_vazio}}</p><br>
+                    </li>
+                {% endif %}
+                {% if senha_invalida %}
+                    <li>
+                        <p>{{senha_invalida}}</p><br>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+        <form class="px-4 py-3" action="{% url 'signin' %}" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="exampleDropdownFormEmail">Email</label>
+                <input type="email" class="form-control" id="email" name='email' value="{{email}}" placeholder="email@meu-email.com" required>
+            </div>
+            <div class="form-group">
+                <label for="exampleDropdownFormPassword">Senha</label>
+                <input type="password" class="form-control" id="pass" name='password' placeholder="Minha Senha" required>
+            </div>
+            <button type="submit" class="btn btn-success form-control">Entrar</button>
+        </form>
+    </body>
+
+</html>
