@@ -41,7 +41,7 @@ class CustomLogQuestions(models.Model):
 
     def __str__(self):
         user = self.user.first_name if self.user.first_name else self.user
-        is_correct = "Resposta Correta" if self.is_correct else "Resposta Errada"
+        is_correct =  "Resposta Correta" if self.is_correct[0] == "T" else "Resposta Errada"
         return f"{self.date} - {user}  --  {self.selected_answer}  -- {is_correct}"
 
 

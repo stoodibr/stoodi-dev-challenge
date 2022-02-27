@@ -41,6 +41,11 @@ def question_answer(request):
 
 @login_required(login_url='/login')
 def log_by_user(request):
-    
-    context = CustomLogs().get_logs_by_user(request.user)
+    try:
+        context = CustomLogs().get_logs_by_user(request.user)
+    except Exception as e:
+        context = {
+            'error_msg' : str(e)
+        }
+        
     return render(request, 'question/logs.html', context=context)
