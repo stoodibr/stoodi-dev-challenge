@@ -33,7 +33,7 @@ class UserViewsTestCase(BaseModel):
         self.assertEquals(response.get('content-type'), 'text/html; charset=utf-8')
 
     def test_logout_view_get_redirect(self):
-        response = self.client.post(reverse('logout'))
+        response = self.client.get(reverse('logout'))
         
         self.assertEquals(response.status_code, 302)
         self.assertEquals(response.charset, 'utf-8')
