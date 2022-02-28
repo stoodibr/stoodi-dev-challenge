@@ -1,9 +1,8 @@
 from django import forms
 from django.contrib.auth.models import User
 
-class userForm(forms.ModelForm):
+class UserForm(forms.ModelForm):
 
-    # password = forms.CharField(widget=forms.PasswordInput(), label='Senha')
     password2 = forms.CharField(widget=forms.PasswordInput(), label='Confirmar Senha')
 
     class Meta:
@@ -12,6 +11,7 @@ class userForm(forms.ModelForm):
         labels = {
             'username' : 'Nome de Usuário',
             'password':'Senha',
+            'email' : 'Email',
             'first_name' : "Primeiro nome",
             'last_name' : "Sobrenome",
         }

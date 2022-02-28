@@ -1,4 +1,4 @@
-from question.models import Question, Answer, CustomLogQuestions
+from question.models import CustomLogQuestions
 
 class CustomLogs():
     """ This class must be responsible to manipulate Questions Logs Model """

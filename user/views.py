@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib import auth
-from .forms import userForm
+from .forms import UserForm
 from django.contrib.auth.decorators import login_required
 
 
@@ -29,7 +29,7 @@ def signin(request):
 
 def signup(request):
     if request.method == 'POST':
-        form = userForm(request.POST)
+        form = UserForm(request.POST)
         if form.is_valid():
             new_user = form.save(commit=False)
             user = User.objects.create_user(
@@ -46,7 +46,7 @@ def signup(request):
             context = {'form_new_user' : form }
             return render(request, 'signup.html', context)        
     
-    form = userForm()
+    form = UserForm()
     context = {'form_new_user' : form }
     return render(request, 'signup.html', context)      
 
