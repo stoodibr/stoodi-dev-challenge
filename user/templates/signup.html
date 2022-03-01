@@ -9,13 +9,15 @@
             {% csrf_token %}
             <div class="form-group">
             {% for field in form_new_user.visible_fields %}
-                <label for='{{field.id_for_label}}'>{{field.label}}</label>
-                {{field}}
-                {% for erros in field.errors %}   </br>
-                    <section class="alert alert-danger" role="alert">
-                        {{erros}}
-                    </section>
-                {% endfor %}
+                <ul>
+                    <label for='{{field.id_for_label}}'>{{field.label}}</label></br>
+                    {{field}}   
+                    {% for erros in field.errors %}   </br>
+                        <section style="color:red;">
+                            *{{erros}}
+                        </section>
+                    {% endfor %}
+                </ul>
             {% endfor %}
             </div>
             <button type="submit" class="btn btn-success">Cadastrar</button>

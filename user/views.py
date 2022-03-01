@@ -11,7 +11,7 @@ def signin(request):
         email = request.POST['email']
         senha = request.POST['password']
         if email == '' or senha == '':
-            erros['campo_vazio'] = 'email ou senha inválidos'
+            erros['empty_field'] = 'email ou senha inválidos'
         else:
             if User.objects.filter(email=email).exists():
                 pessoa = User.objects.get(email=email)
@@ -20,10 +20,10 @@ def signin(request):
                     auth.login(request, user)
                     return redirect('question')    
                 else:
-                    erros['senha_invalida'] = 'senha inválida'
+                    erros['incorrect_input'] = 'Senha Inválida'
                     erros['email'] = email
             else:
-                erros['senha_invalida'] = 'Email Incorreto'
+                erros['incorrect_input'] = 'Email Incorreto'
                         
     return render (request, 'signin.html', erros)
 
@@ -42,9 +42,9 @@ def signup(request):
             user.save()
             auth.login(request, user)
             return redirect('question')
-        else:
-            context = {'form_new_user' : form }
-            return render(request, 'signup.html', context)        
+       
+        context = {'form_new_user' : form }
+        return render(request, 'signup.html', context)        
     
     form = UserForm()
     context = {'form_new_user' : form }

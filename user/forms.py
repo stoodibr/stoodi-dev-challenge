@@ -35,7 +35,7 @@ class UserForm(forms.ModelForm):
             self.add_error('email',"é necessário preencher o campo email.")
         
         if user == None or len(user) < 5 :
-            self.add_error('username',"O nome de usuário precisa ter no minimo 5 caracteres.")
+            self.add_error('username',"O nome de usuário precisa ter no mínimo 5 caracteres.")
         
         if User.objects.filter(username=user).exists():
             self.add_error('username',"Este nome de usuário já está sendo usado, escolha outro.")

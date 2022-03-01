@@ -26,7 +26,7 @@ class UserFormTestCase(BaseModel):
     
     def test_clean_username_field(self):
         form = UserForm(data={"username": "123"})
-        self.assertEqual(form.errors["username"], ["O nome de usuário precisa ter no minimo 5 caracteres."])
+        self.assertEqual(form.errors["username"], ["O nome de usuário precisa ter no mínimo 5 caracteres."])
     
     def test_clean_username_field_in_use(self):
         form = UserForm(data={"username": self.user.username})
