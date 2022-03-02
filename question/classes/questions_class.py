@@ -30,8 +30,8 @@ class QuestionsRequest():
     def get_next_question_id(self):
         if self.__current_answer:
             next_question_id = int(self.__current_answer.question_id.id) + 1
-            if Question.objects.filter(id=next_question_id).exists():
-                return str(next_question_id)
+            if Question.objects.filter(id__gte=next_question_id).exists():
+                return str(Question.objects.filter(id__gte=next_question_id)[0].id)
         
         return Question.objects.all()[0].id
 

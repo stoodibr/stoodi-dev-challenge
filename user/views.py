@@ -50,7 +50,7 @@ def signup(request):
     context = {'form_new_user' : form }
     return render(request, 'signup.html', context)      
 
-@login_required(login_url='/login')
+@login_required(login_url='/')
 def logout(request):
     auth.logout(request)
     return redirect('question')

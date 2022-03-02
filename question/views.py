@@ -23,8 +23,7 @@ def question_answer(request):
         answer, is_correct = request.POST.get('answer', None), False
         if answer:
             is_correct, current_answer_text = questions.get_question_result(answer)
-            if request.user.is_authenticated:
-                logger.add_log(answer= f"id: {answer} Resposta: {current_answer_text}" , is_correct=is_correct, user=request.user)
+            logger.add_log(answer= f"Cod. Questão: {answer} Resposta: {current_answer_text}" , is_correct=is_correct, user=request.user)
 
         context = {
             'is_correct': is_correct,
