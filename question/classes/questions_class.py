@@ -1,5 +1,5 @@
 from question.models import Question, Answer
-QUESTION_VISUAL_ID = ['a','b','c','d','e','f','g','h','i','j','k']
+ANSWER_VISUAL_ID = ['a','b','c','d','e','f','g','h','i','j','k']
 
 class QuestionsRequest():
     """ This class must be responsible to manipulate Questions Model requests  """
@@ -22,7 +22,7 @@ class QuestionsRequest():
         answer_dict = {}
         i = 0
         for item in answer_query:
-            answer_dict[QUESTION_VISUAL_ID[i]] = item
+            answer_dict[ANSWER_VISUAL_ID[i]] = item
             i += 1
         
         return answer_dict
