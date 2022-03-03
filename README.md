@@ -64,3 +64,19 @@ questão do banco.
 - História 8:
   - Para usuário logados, crie uma página com o log de todas as questões feitas pelo usuário em "/log-questoes/".
 
+
+---- 
+
+# Dados
+
+Rafael Matthes
+contato: rafael.matthes@live.com
+
+- Considerações: 
+
+  - Acabei de empolgando no desenvolvimento e resolvi mais de uma história( aquelas que se complementavam )
+ no mesmo commit.
+ 
+  - Não fiz grandes alterações nos templates.
+
+
