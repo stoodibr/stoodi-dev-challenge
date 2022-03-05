@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+</head>
+
+<body>      
+      <div id="login">
+        <form method="post" action=""> 
+          <!-- {% csrf_token %} -->
+          <h1>Login</h1> 
+          <p> 
+            <label for="nome_login">User: </label>
+            <input id="nome_login" name="nome_login" required="required" type="text" placeholder="ex. contato@htmlecsspro.com"/>
+          </p>
+           
+          <p> 
+            <label for="pass_login">Sua senha: </label>
+            <input id="pass_login" name="pass_login" required="required" type="password"/> 
+          </p>
+           
+           
+          <p> 
+            <input type="submit" value="Logar" /> 
+          </p>
+           
+          <p class="link">
+            Ainda não tem conta?
+            <a href="/cadastro">Cadastre-se</a>
+          </p>
+        </form>
+      </div>
+
+      </body>
+</html>

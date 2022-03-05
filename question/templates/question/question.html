@@ -1,3 +1,6 @@
+{% block content %}
+
+<!-- {% if request.user.is_authenticated %} -->
 <!DOCTYPE html>
 <html>
     <head>
@@ -6,7 +9,9 @@
 
     <body>
         <form action="{% url 'question_answer' %}" method="POST">
-            {% csrf_token %}
+            <!-- {% csrf_token %} -->
+            <li>User: {{ user.get_username }}</li>
+
             <p>{{ question_text}}</p>
 
             {% for letter, value in answers.items %}
@@ -18,3 +23,8 @@
         </form>
     </body>
 </html>
+<!-- {% else %}
+    Você não tem acesso a essa pagina!
+{% endif %} -->
+
+{% endblock %}
