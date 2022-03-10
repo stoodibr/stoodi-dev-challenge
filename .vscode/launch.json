@@ -1,0 +1,31 @@
+{
+    // Use o IntelliSense para saber mais sobre os atributos possíveis.
+    // Focalizar para exibir as descrições dos atributos existentes.
+    // Para obter mais informações, acesse: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Stoodi-cd",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/manage.py",
+            "args": [
+                "runserver"
+            ],
+            "django": true,
+            "python": "/home/matheus/.pyenv/versions/stoodi-challenge-dev/bin/python",
+            "justMyCode": true
+        },
+        {
+            "name": "Stoodi-cd Test",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/manage.py",
+            "args": [
+                "test",
+                "${relativeFileDirname}/${fileBasename}"
+            ],
+            "django": true,
+        }
+    ]
+}
