@@ -2,21 +2,24 @@
 from django.shortcuts import render
 from utils.sort import sorting_answers
 
+from .models import Question
+
 
 def question(request):
-    text = 'Quanto é 2^5?'
-
-    answers = {
-        'a': '0',
-        'b': '2',
-        'c': '16',
-        'd': '32',
-        'e': '128',
-    }
+    questions = Question.objects.order_by('id')
+    for question in questions:
+        text = question.text
+        answers_list = {
+            'a': question.choice_a,
+            'b': question.choice_b,
+            'c': question.choice_c,
+            'd': question.choice_d,
+            'e': question.choice_e,
+        }
    
     context = {
-        'question_text': text,
-        'answers': sorting_answers(answers),
+        'text': text,
+        'answers_list': sorting_answers(answers_list),
     }
 
     return render(request, 'question/question.html', context=context)
