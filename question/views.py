@@ -1,10 +1,10 @@
 #coding: utf8
 from django.shortcuts import render
-
+from datetime import date
 from utils.sort import sorting_answers
 from utils.pagination import get_next_question
 
-from .models import Question
+from .models import Question, Answers
 
 
 def question(request, id):
@@ -28,9 +28,10 @@ def question(request, id):
 def question_answer(request):
     answer = request.POST.get('answer', 'z')
     question_id = request.POST.get('question_id', '1')
-    
+    question = Question.objects.get(id=question_id)
     try:
         is_correct = answer == Question.objects.get(id=question_id).correct_answer
+        answer = Answers.objects.create( question=question, answer_option=answer, is_correct= is_correct)
         context = {
         'is_correct': is_correct,
         'question_id': question_id,
