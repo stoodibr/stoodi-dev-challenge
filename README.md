@@ -68,5 +68,5 @@ questão do banco.
 - e-mail: matheusfumian@gmail.com
 - telefone/whatsapp: (24)992824045
 - Algumas observações a serem feitas: 
-  - O projeto agora precisa ser acessado passando um argumento com o id da primeira pergunta para que a paginação funcione.
-  - Até o momento não consegui finalizar os testes nem os bônus pois tive alguns imprevistos. Vou finalizá-los o mais breve possível e sinalizo a equipe por e-mail.
+  - O projeto pode ser acessado passando um argumento com o id da pergunta ou caso não passe nada será iniciado com o id=1.
+  - Até o momento não consegui finalizar os bônus pois tive alguns imprevistos. Vou finalizá-los o mais breve possível e sinalizo a equipe por e-mail.

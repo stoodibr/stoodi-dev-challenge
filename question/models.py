@@ -10,7 +10,6 @@ class Question(models.Model):
     choice_c = models.CharField(max_length=4, null=True)
     choice_d = models.CharField(max_length=4, null=True)
     choice_e = models.CharField(max_length=4, null=True)
-
     correct_answer = models.CharField(max_length=4, null=True)
 
 class Answers(models.Model):

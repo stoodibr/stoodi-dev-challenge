@@ -6,6 +6,8 @@ from utils.pagination import get_next_question
 
 from .models import Question, Answers
 
+def index(request):
+    return question(request, '1')
 
 def question(request, id):
     question = Question.objects.get(pk=id)

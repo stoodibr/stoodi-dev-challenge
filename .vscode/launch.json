@@ -26,6 +26,7 @@
                 "${relativeFileDirname}/${fileBasename}"
             ],
             "django": true,
+            "python": "/home/matheus/.pyenv/versions/stoodi-challenge-dev/bin/python",
         }
     ]
 }
