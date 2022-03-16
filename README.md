@@ -64,3 +64,9 @@ questão do banco.
 - História 8:
   - Para usuário logados, crie uma página com o log de todas as questões feitas pelo usuário em "/log-questoes/".
 
+## Matheus Lessa Fumian
+- e-mail: matheusfumian@gmail.com
+- telefone/whatsapp: (24)992824045
+- Algumas observações a serem feitas: 
+  - O projeto agora precisa ser acessado passando um argumento com o id da primeira pergunta para que a paginação funcione.
+  - Até o momento não consegui finalizar os testes nem os bônus pois tive alguns imprevistos. Vou finalizá-los o mais breve possível e sinalizo a equipe por e-mail.
