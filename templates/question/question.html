@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Questão 1</title>
+</head>
+
+<body>
+    <div>
+        <a href="{% url 'login_page' %}">Login</a> | <a href="{% url 'create_user' %}">Cadastre-se</a>
+        <br><br>
+        {{ user }} | <a href="{% url 'logout' %}">Sair</a>
+        <br>
+    </div>
+
+    <form action="{% url 'question_answer' %}" method="POST">
+        {% csrf_token %}
+        <p>{{ text }}</p>
+
+
+        {% for letter, value in answers_list.items %}
+        <input type="radio" name="answer" value="{{ letter }}"><b>{{ letter }}.</b> {{ value }}</input><br />
+        {% endfor %}
+
+        <br />
+        <input type="hidden" name="question_id" value="{{ question_id }}">
+        <input type="submit" value="Ok" />
+    </form>
+</body>
+
+</html>

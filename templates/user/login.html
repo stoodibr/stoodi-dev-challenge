@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Login</title>
+    </head>
+
+    <body>
+        <div>
+            <a href="{% url 'create_user' %}">Cadastre-se</a>
+        </div>
+        <form method = 'post'>
+            {% csrf_token %}
+            {{form.as_p}}
+            <input type = "submit" value = "Entrar">
+        </form>
+    </body>
+</html>

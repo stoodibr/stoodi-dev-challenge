@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
 
     'question',
+    'user',
 )
 
 MIDDLEWARE = (
@@ -62,7 +63,7 @@ ROOT_URLCONF = 'selecao.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR+'/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

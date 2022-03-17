@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Cadastro</title>
+</head>
+
+<body>
+    <div>
+      <a href="{% url 'index' %}">Perguntas</a> | <a href="{% url 'login_page' %}">Login</a></a>
+    </div>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type = "submit" value = "Entrar">
+    </form>
+</body>
+
+</html>
