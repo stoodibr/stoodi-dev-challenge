@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Log de Questões</title>
+</head>
+
+<body>
+    <div>
+        <a href="{% url 'login_page' %}">Login</a> | <a href="{% url 'create_user' %}">Cadastre-se</a>
+        <br><br>
+        {{ user }} | <a href="{% url 'log_questions' %}">Log de Questões</a> |<a href="{% url 'logout' %}">Sair</a>
+        <br><br>
+    </div>
+
+    <div>
+        {% for answer in answers %}
+        {{ answer.question }} - {{ answer.is_correct }} - {{ answer.date }}
+        <br>
+        {% endfor %}
+    </div>
+</body>
+
+</html>

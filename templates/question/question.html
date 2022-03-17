@@ -9,8 +9,8 @@
     <div>
         <a href="{% url 'login_page' %}">Login</a> | <a href="{% url 'create_user' %}">Cadastre-se</a>
         <br><br>
-        {{ user }} | <a href="{% url 'logout' %}">Sair</a>
-        <br>
+        {{ user }} | <a href="{% url 'log_questions' %}">Log de Questões</a> | <a href="{% url 'logout' %}">Sair</a>
+        <br><br>
     </div>
 
     <form action="{% url 'question_answer' %}" method="POST">

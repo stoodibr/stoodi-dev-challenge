@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.contrib.auth.models import User
+from question.models import Answers
 
 
 def login_page(request):
@@ -40,3 +40,11 @@ def create_user(request):
 def logout_user(request):
     logout(request)
     return redirect('index')
+
+
+def log_questions(request):
+    if request.user.is_authenticated:
+        answers = Answers.objects.filter(user= request.user)
+        return render(request, 'user/log_questions.html', {'answers': answers})
+    else:
+        return redirect('index')
