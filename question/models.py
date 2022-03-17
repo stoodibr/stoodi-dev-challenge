@@ -17,3 +17,4 @@ class Answers(models.Model):
     answer_option = models.CharField(max_length=4)
     date = models.DateField('reply date', default=datetime.now)
     is_correct = models.BooleanField('is the answer correct', default= True)
+    user = models.CharField(max_length=400, null=True)

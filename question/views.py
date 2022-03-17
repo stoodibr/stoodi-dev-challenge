@@ -30,10 +30,11 @@ def question(request, id):
 def question_answer(request):
     answer = request.POST.get('answer', 'z')
     question_id = request.POST.get('question_id', '1')
+    user = request.POST.get('user')
     question = Question.objects.get(id=question_id)
     try:
         is_correct = answer == Question.objects.get(id=question_id).correct_answer
-        answer = Answers.objects.create( question=question, answer_option=answer, is_correct= is_correct)
+        answer = Answers.objects.create( question=question, answer_option=answer, is_correct= is_correct, user=user)
         context = {
         'is_correct': is_correct,
         'question_id': question_id,
