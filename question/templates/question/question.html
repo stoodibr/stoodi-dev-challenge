@@ -7,14 +7,19 @@
     <body>
         <form action="{% url 'question_answer' %}" method="POST">
             {% csrf_token %}
-            <p>{{ question_text}}</p>
+            {% if question_text != None %}
 
-            {% for letter, value in answers.items %}
-                <input type="radio" name="answer" value="{{ letter }}"><b>{{ letter }}.</b> {{ value }}</input><br/>
-            {% endfor %}
+                <p>{{ question_text}}</p>
 
-            <br/>
-            <input type="submit" value="Ok" />
+                {% for letter, value in answers.items %}
+                    <input type="radio" name="answer" value="{{ letter }}"><b>{{ letter }}.</b> {{ value }}</input><br/>
+                {% endfor %}
+                <br/>
+                <input type="submit" value="Ok" />
+            {% else %}
+                <p>Nenhuma questão encontrada.</p>
+            {% endif %}
+
         </form>
     </body>
 </html>

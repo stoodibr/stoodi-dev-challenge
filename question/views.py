@@ -1,28 +1,33 @@
 #coding: utf8
 from django.shortcuts import render
 
+from .models import Question, Answer
 from .utils.core import sort_dict_by_keys
+from selecao.utils.database import queryset_to_dict
+from .constants import QUESTION_TEMPLATE
 
 
 def question(request):
-    text = 'Quanto é 2^5?'
+    question = Question.objects.first()
 
-    answers = {
-        'd': '32',
-        'c': '16',
-        'e': '128',
-        'a': '0',
-        'b': '2',
-    }
+    if question is None:
+        return render(request, QUESTION_TEMPLATE)
 
-    answers_sorted = sort_dict_by_keys(answers)
+    answers = (
+        Answer.objects.filter(question=question.id)
+        .order_by('letter').values()
+    )
+
+    answers_dict = (answers
+                    and queryset_to_dict(answers, 'letter', 'text'))
+    answers_sorted = answers_dict and sort_dict_by_keys(answers_dict)
 
     context = {
-        'question_text': text,
+        'question_text': question.text,
         'answers': answers_sorted,
     }
 
-    return render(request, 'question/question.html', context=context)
+    return render(request, QUESTION_TEMPLATE, context=context)
 
 
 def question_answer(request):
