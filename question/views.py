@@ -1,25 +1,29 @@
 #coding: utf8
 from django.shortcuts import render
 
+from .utils.core import sort_dict_by_keys
+
 
 def question(request):
     text = 'Quanto é 2^5?'
 
-    # BUG: as respostas estão ficando fora de ordem
     answers = {
+        'd': '32',
+        'c': '16',
+        'e': '128',
         'a': '0',
         'b': '2',
-        'c': '16',
-        'd': '32',
-        'e': '128',
     }
+
+    answers_sorted = sort_dict_by_keys(answers)
 
     context = {
         'question_text': text,
-        'answers': answers,
+        'answers': answers_sorted,
     }
 
     return render(request, 'question/question.html', context=context)
+
 
 def question_answer(request):
     answer = request.POST.get('answer', 'z')
