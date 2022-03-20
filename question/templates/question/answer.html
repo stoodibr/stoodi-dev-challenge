@@ -5,10 +5,14 @@
     </head>
 
     <body>
-    {% if is_correct %}
-        Resposta correta!
+    {% if success %}
+        {% if is_correct %}
+            Resposta correta!
+        {% else %}
+            Resposta errada!
+        {% endif %}
     {% else %}
-        Resposta errada!
+        Desculpe, houve algum erro. Tente novamente mais tarde.
     {% endif %}
 
     <br/>

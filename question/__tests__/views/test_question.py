@@ -1,11 +1,12 @@
 from django.test import TestCase
 
 from question.models import Answer, Question
+from question.constants import QUESTION_TEMPLATE
 
 
 class QuestionViewTest(TestCase):
     @classmethod
-    def setUpTestData(cls):
+    def setUpTestData(self):
         question = Question.objects.create(text='Foo')
         question2 = Question.objects.create(text='Bar')
 
@@ -37,7 +38,7 @@ class QuestionViewTest(TestCase):
 
         response = self.client.get('/')
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'question/question.html')
+        self.assertTemplateUsed(response, QUESTION_TEMPLATE)
 
     def test_view_context_render(self):
         """
@@ -74,4 +75,4 @@ class QuestionViewTest(TestCase):
 
         response = self.client.get('/')
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'question/question.html')
+        self.assertTemplateUsed(response, QUESTION_TEMPLATE)
