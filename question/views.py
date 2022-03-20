@@ -9,14 +9,22 @@ from question.constants import QUESTION_TEMPLATE, ANSWER_TEMPLATE
 
 
 def question(request):
-    question = Question.objects.first()
+    last_question = Question.objects.last()
 
-    if question is None:
+    if not(last_question):
         return render(request, QUESTION_TEMPLATE)
+
+    question_id = request.GET.get('q')
+
+    if not(question_id) or int(question_id) > last_question.id:
+        question_id = Question.objects.first().id
+
+    question = Question.objects.get(id=question_id)
 
     answers = (
         Answer.objects.filter(question=question.id)
-        .order_by('letter').values()
+        .order_by('letter')
+        .values()
     )
 
     answers_dict = (answers
@@ -41,6 +49,7 @@ def question_answer(request):
     try:
         answer = request.POST.get('answer', 'z')
         question_id = request.POST.get('question_id')
+        total_questions = Question.objects.count()
 
         is_correct = check_answer(question_id, answer)
 
@@ -49,6 +58,8 @@ def question_answer(request):
 
     else:
         context['is_correct'] = is_correct
+        context['total_questions'] = total_questions
+        context['question_id'] = question_id
 
     finally:
         return render(request, ANSWER_TEMPLATE, context=context)
