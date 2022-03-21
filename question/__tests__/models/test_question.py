@@ -2,7 +2,7 @@ from django.test import TestCase
 from question.models import Question
 
 
-class QuestionModelDomainIntegrityTest(TestCase):
+class TestQuestionModelDomainIntegrity(TestCase):
     def setUp(self):
         self.foo_question = {'text': 'Foo'}
         self.bar_question = {'text': 'Bar'}

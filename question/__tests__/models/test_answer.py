@@ -2,7 +2,7 @@ from django.test import TestCase
 from question.models import Answer, Question
 
 
-class AnswerModelDomainIntegrityTest(TestCase):
+class TestAnswerModelDomainIntegrity(TestCase):
     def setUp(self):
         question = Question.objects.create(text='Question 1')
 
@@ -27,7 +27,7 @@ class AnswerModelDomainIntegrityTest(TestCase):
         max_length = answer._meta.get_field('text').max_length
         self.assertAlmostEqual(max_length, 255)
 
-    def test_representation(self):
+    def test_model_representation(self):
         """SHOULD return repr in pattern:
             Q{question.id}. ({answer.letter}) {answer.text}
         """
@@ -38,7 +38,7 @@ class AnswerModelDomainIntegrityTest(TestCase):
         self.assertEqual(answer, expected_repr)
 
 
-class AnswerModelReferenceIntegrityTest(TestCase):
+class TestAnswerModelReferenceIntegrity(TestCase):
     def setUp(self):
         self.question = Question.objects.create(text='Quanto é 2+2')
 

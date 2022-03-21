@@ -4,7 +4,7 @@ from question.models import Question
 from user.models import UserHistory
 
 
-class UserHistoryDomainIntegrityTest(TestCase):
+class TestUserHistoryDomainIntegrity(TestCase):
     def setUp(self):
         question = Question.objects.create(text='Foo')
 

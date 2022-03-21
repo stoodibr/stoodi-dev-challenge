@@ -4,7 +4,7 @@ from question.models import Answer, Question
 from question.constants import ANSWER_TEMPLATE
 
 
-class AnswerViewTest(TestCase):
+class TestAnswerView(TestCase):
     @classmethod
     def setUpTestData(self):
         question = Question.objects.create(text='Foo')
