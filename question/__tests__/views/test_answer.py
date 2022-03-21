@@ -5,8 +5,7 @@ from question.constants import ANSWER_TEMPLATE
 
 
 class TestAnswerView(TestCase):
-    @classmethod
-    def setUpTestData(self):
+    def setUp(self):
         question = Question.objects.create(text='Foo')
 
         Answer.objects.create(
@@ -30,7 +29,7 @@ class TestAnswerView(TestCase):
 
     def test_view_uses_correct_template(self):
         """
-            SHOULD render template question/resposta.html
+            SHOULD render template question/answer.html
             WHEN access endpoint '/resposta'
         """
 

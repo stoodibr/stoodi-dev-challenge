@@ -5,8 +5,7 @@ from question.constants import QUESTION_TEMPLATE
 
 
 class TestQuestionView(TestCase):
-    @classmethod
-    def setUpTestData(self):
+    def setUp(self):
         question = Question.objects.create(text='Foo')
         question2 = Question.objects.create(text='Bar')
 
