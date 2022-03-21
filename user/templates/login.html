@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Cadastro</title>
+        <style>
+            body, html {
+                height: 100%;
+                width: 100%;
+                padding: 0;
+                margin: 0;
+            }
+            main {
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+            }
+            main header h1 {
+                font-size: 3rem;
+            }
+            .container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 30%;
+            }
+            form div {
+                display: flex;
+                gap: 3rem;
+                margin-bottom: 1rem;
+            }
+            form label {
+                width: 4rem;
+                display: flex;
+                align-items: center;
+            }
+            form input {
+                margin-right: 0;
+                height: 2rem;
+            }
+            .btn-group {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .btn-group input, .btn-group button {
+                height: 2rem;
+                width: 6rem;
+            }
+
+            .alert-danger {
+                color: red;
+            }
+
+            .alert-warning {
+                color: #9e940b;
+            }
+
+            .alert-info {
+                color: gray;
+            }
+
+            .input-name {
+                text-transform: capitalize;
+            }
+        </style>
+    </head>
+
+    <body>
+        <main>
+            <header>
+                <h1>Login</h1>
+            </header>
+
+            {% if request.GET.l == '1' %}
+                <p class="alert-danger">E-mail ou senha inválidos</p>
+            {% elif request.GET.lt == '1' %}
+                <p class="alert-warning">Usuário deslogado com sucesso</p>
+            {% else %}
+                <p class="alert-info">Preencha todos os campos corretamente</p>
+            {% endif %}
+
+            <div class="container">
+                <form action="{% url 'login_validation' %}" method="POST">
+                    {% csrf_token %}
+                    <div>
+                        <label for="user_email">E-mail</label>
+                        <input required name="user_email" type="email">
+                    </div>
+
+                    <div>
+                        <label for="user_password">Senha</label>
+                        <input required name="user_password" type="password" autocomplete="new-password">
+                    </div>
+
+                    <div class="btn-group">
+                        <input type="submit" value="Entrar" />
+                        <button type="reset">Limpar</button>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </body>
+</html>

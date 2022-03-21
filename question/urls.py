@@ -6,6 +6,8 @@ from . import views
 
 urlpatterns = [
     re_path(r'^$', views.question, name='question'),
-    re_path(r'^resposta/$', views.question_answer, name='question_answer'),
-
+    re_path(
+        r'^resposta/$', views.question_answer, name='question_answer'),
+    re_path(
+        r'^log-questoes/$', views.question_log, name='question_log'),
 ]

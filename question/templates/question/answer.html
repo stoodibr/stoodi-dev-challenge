@@ -5,15 +5,28 @@
     </head>
 
     <body>
-    {% if is_correct %}
-        Resposta correta!
+    {% if success %}
+        {% if is_correct %}
+            Resposta correta!
+        {% else %}
+            Resposta errada!
+        {% endif %}
     {% else %}
-        Resposta errada!
+        Desculpe, houve algum erro. Tente novamente mais tarde.
     {% endif %}
 
     <br/>
     <br/>
-    <a href="{% url 'question' %}">Tente novamente</a>
+    {% if total_questions > 1 %}
+        {% if is_correct == None or success == False %}
+            {% firstof question_id|add:'-1' as question_id %}
+            <p>{success}</p>
+        {% endif %}
+
+        <a href="{% url 'question' %}?q={{question_id|add:'1'}}">Próxima questão</a>
+    {% else %}
+        <a href="{% url 'question' %}?q={{question_id}}">Tente novamente</a>
+    {% endif %}
 
     </body>
 </html>

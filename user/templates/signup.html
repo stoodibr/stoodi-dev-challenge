@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Cadastro</title>
+        <style>
+            body, html {
+                height: 100%;
+                width: 100%;
+                padding: 0;
+                margin: 0;
+            }
+            main {
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+            }
+            main header h1 {
+                font-size: 3rem;
+            }
+            .container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 30%;
+            }
+            form div {
+                display: flex;
+                gap: 3rem;
+                margin-bottom: 1rem;
+            }
+            form label {
+                width: 4rem;
+                display: flex;
+                align-items: center;
+            }
+            form input {
+                margin-right: 0;
+                height: 2rem;
+            }
+            .btn-group {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .btn-group input, .btn-group button {
+                height: 2rem;
+                width: 6rem;
+            }
+
+            .alert-danger {
+                color: red;
+            }
+
+            .alert-info {
+                color: gray;
+            }
+            .input-name {
+                text-transform: capitalize;
+            }
+        </style>
+    </head>
+
+    <body>
+        {% csrf_token %}
+        <main>
+            <header>
+                <h1>Cadastro</h1>
+            </header>
+
+            {% if request.GET.err == '1' %}
+                <p class="alert-danger">Houve algum erro no servidor. Por favor, tente novamente mais tarde.</p>
+            {% elif request.GET.s == '1' %}
+                <p class="alert-danger">E-mail é obrigatório.</p>
+            {% elif request.GET.s == '2' %}
+                <p class="alert-danger">Senha é obrigatória.</p>
+            {% elif request.GET.s == '3' %}
+                <p class="alert-danger">Nome é obrigatório.</p>
+            {% elif request.GET.s == '4' %}
+                <p class="alert-danger">O e-mail informado está no formato inválido.</p>
+            {% elif request.GET.s == '5' %}
+                <p class="alert-danger">O e-mail informado já está cadastrado.</p>
+            {% else %}
+                <p class="alert-info">Preencha todos os campos corretamente.</p>
+            {% endif %}
+
+            <div class="container">
+                <form action="{% url 'signup_validation' %}" method="POST">
+                    {% csrf_token %}
+                    <div>
+                        <label for="user_name">Nome</label>
+                        <input class="input-name" name="user_name" type="search" autocomplete="off">
+                    </div>
+
+                    <div>
+                        <label for="user_email">E-mail</label>
+                        <input name="user_email" type="email">
+                    </div>
+
+                    <div>
+                        <label for="user_password">Senha</label>
+                        <input name="user_password" type="password" autocomplete="new-password">
+                    </div>
+
+                    <div class="btn-group">
+                        <input type="submit" value="Cadastrar" />
+                        <button type="reset">Limpar</button>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </body>
+</html>
