@@ -1,11 +1,17 @@
 #coding: utf8
+import pytz
+
 from django.shortcuts import render
 
 from selecao.utils.database import queryset_to_dict
 from question.models import Question, Answer
 from question.utils.core import sort_dict_by_keys
 from question.utils.answer import check_answer
-from question.constants import QUESTION_TEMPLATE, ANSWER_TEMPLATE
+from question.constants import (
+    QUESTION_LOG_TEMPLATE,
+    QUESTION_TEMPLATE,
+    ANSWER_TEMPLATE
+)
 from user.models import UserHistory
 
 
@@ -73,3 +79,28 @@ def question_answer(request):
 
     finally:
         return render(request, ANSWER_TEMPLATE, context=context)
+
+
+def question_log(request):
+    history_dict = []
+
+    if request.user.is_authenticated:
+        history = (
+            UserHistory.objects
+            .filter(user=request.user)
+            .values()
+            .order_by('-created_at')
+        )
+
+        for row in history:
+            # converte para fuso horário de São Paulo
+            row['date_formated'] = (
+                row['created_at']
+                .astimezone((pytz.timezone('America/Sao_Paulo')))
+                .strftime("%d/%m/%Y %H:%M:%S")
+            )
+            history_dict.append(row)
+
+    return render(request, QUESTION_LOG_TEMPLATE, context={
+        'history':  history_dict
+    })
