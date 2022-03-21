@@ -43,10 +43,11 @@ class TestUserHistoryDomainIntegrity(TestCase):
 
         repr_result = str(user_history)
         repr_expected = str({
+            'user': user_history.user,
             'question': user_history.question.id,
             'letter': user_history.letter,
             'is_correct': user_history.is_correct,
-            'datetime': user_history.created_at
+            'datetime': user_history.created_at,
         })
 
         self.assertEqual(repr_result, repr_expected)

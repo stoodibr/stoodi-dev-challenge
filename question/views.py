@@ -55,17 +55,20 @@ def question_answer(request):
 
         is_correct = check_answer(question_id, answer)
 
-    except:
+        user = request.user if request.user.is_authenticated else None
+    except Exception:
         context['success'] = False
 
     else:
         context['is_correct'] = is_correct
         context['total_questions'] = total_questions
         context['question_id'] = question_id
+
         UserHistory(
             question=question,
             letter=answer,
-            is_correct=is_correct
+            is_correct=is_correct,
+            user=user
         ).save()
 
     finally:
