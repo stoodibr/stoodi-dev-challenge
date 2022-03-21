@@ -1,26 +1,103 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Questão 1</title>
-    </head>
 
-    <body>
-        <form action="{% url 'question_answer' %}" method="POST">
-            {% csrf_token %}
-            {% if question_text != None %}
+<head>
+    <title>Questão 1</title>
+    <style>
+        body,
+        html {
+            width: 100%;
+            overflow-x: hidden;
+        }
 
-                <p>{{ question_text}}</p>
+        a {
+            color: white;
+            text-decoration: none;
+        }
 
-                {% for letter, value in answers.items %}
-                    <input required type="radio" name="answer" value="{{ letter }}"><b>{{ letter }}.</b> {{ value }}</input><br/>
-                {% endfor %}
-                <br/>
-                <input type="hidden" name="question_id" value="{{question_id}}" />
-                <input type="submit" value="Ok" />
+        a:hover {
+            opacity: 70%;
+        }
+
+        nav a+a:before {
+            content: " | ";
+            padding: 0 10px;
+        }
+
+        nav {
+            background-color: steelblue;
+            color: white;
+            width: 97.5vw;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 3rem;
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
+        nav .nav-user {
+            font-size: 1.5rem;
+        }
+
+        nav .nav-acc {
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+
+<body>
+    {% csrf_token %}
+    {% load define_action %}
+
+    {% if user.is_authenticated %}
+    {% define user.first_name as user_name %}
+    {% else %}
+    {% define "Visitante" as user_name %}
+    {% endif %}
+
+    <nav>
+        <div class="nav-user">
+            <div class="nav-user-name">Olá, {{user_name}}!</div>
+        </div>
+        <div class="nav-acc">
+            {% if user.is_authenticated %}
+            <div class="nav-acc-logout">
+                <a href="{% url 'logout' %}">Histório</a>
+                <a href="{% url 'logout' %}">Sair</a>
+            </div>
             {% else %}
-                <p>Nenhuma questão encontrada.</p>
+            <div class="nav-acc-logout">
+                <a href="{% url 'login' %}">Entrar</a>
+                <a href="{% url 'signup' %}">Cadastrar</a>
+            </div>
             {% endif %}
+        </div>
+    </nav>
 
-        </form>
-    </body>
+    <header>
+        <div>
+            <h2>Questões</h2>
+        </div>
+    </header>
+
+    <form action="{% url 'question_answer' %}" method="POST">
+        {% csrf_token %}
+        {% if question_text != None %}
+
+        <p>{{ question_text}}</p>
+
+        {% for letter, value in answers.items %}
+        <input required type="radio" name="answer" value="{{ letter }}"><b>{{ letter }}.</b> {{ value }}</input><br />
+        {% endfor %}
+        <br />
+        <input type="hidden" name="question_id" value="{{question_id}}" />
+        <input type="submit" value="Ok" />
+        {% else %}
+        <p>Nenhuma questão encontrada.</p>
+        {% endif %}
+
+    </form>
+</body>
+
 </html>
