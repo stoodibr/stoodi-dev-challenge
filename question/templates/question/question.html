@@ -63,7 +63,7 @@
         <div class="nav-acc">
             {% if user.is_authenticated %}
             <div class="nav-acc-logout">
-                <a href="{% url 'logout' %}">Histório</a>
+                <a href="{% url 'question_log' %}">Histório</a>
                 <a href="{% url 'logout' %}">Sair</a>
             </div>
             {% else %}
