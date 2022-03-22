@@ -35,3 +35,6 @@ down:
 remove:
 	docker stop $(CONTAINER) || true && docker rm $(CONTAINER) || true
 	docker rmi $(IMAGE)
+
+migrations:
+	$(MANAGECMD) /bin/bash -c "python3 manage.py makemigrations && python3 manage.py migrate"
