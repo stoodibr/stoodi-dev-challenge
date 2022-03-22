@@ -1,22 +1,26 @@
-#coding: utf8
+# coding: utf8
 from django.shortcuts import render
+from django.views import View
 
 from question.models import Question
 
 
-def question(request):
-    context = {
-        'question': Question.objects.first()
-    }
+class QuestionView(View):
+    template_name = "question/question.html"
+    answer_template_name = "question/answer.html"
 
-    return render(request, 'question/question.html', context=context)
+    def get(self, request):
+        context = {"question": Question.objects.first()}
+        return render(request, self.template_name, context=context)
 
-def question_answer(request):
-    answer = request.POST.get('answer', 'z')
-    is_correct = answer == 'd'
+    def post(self, request):
+        question_id = request.POST.get("question")
+        question = Question.objects.get(id=question_id)
+        answer = request.POST.get("answer", "z")
+        is_correct = question.is_option_correct(answer)
 
-    context = {
-        'is_correct': is_correct,
-    }
+        context = {
+            "is_correct": is_correct,
+        }
 
-    return render(request, 'question/answer.html', context=context)
+        return render(request, self.answer_template_name, context=context)

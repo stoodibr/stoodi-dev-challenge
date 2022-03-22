@@ -1,12 +1,13 @@
 from django.db import models
 
 QUESTION_OPTION_CHOICES = (
-        ('A', 'Option A'),
-        ('B', 'Option B'),
-        ('C', 'Option C'),
-        ('D', 'Option D'),
-        ('E', 'Option E')
-    )
+    ("A", "Option A"),
+    ("B", "Option B"),
+    ("C", "Option C"),
+    ("D", "Option D"),
+    ("E", "Option E"),
+)
+
 
 class Question(models.Model):
     text = models.CharField(max_length=200)
@@ -24,7 +25,8 @@ class Question(models.Model):
             "B": self.option_B,
             "C": self.option_C,
             "D": self.option_D,
-            "E": self.option_E
+            "E": self.option_E,
         }
 
-
+    def is_option_correct(self, option):
+        return option == self.correct_option
