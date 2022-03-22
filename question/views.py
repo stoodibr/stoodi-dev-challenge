@@ -1,22 +1,12 @@
 #coding: utf8
 from django.shortcuts import render
 
+from question.models import Question
+
 
 def question(request):
-    text = 'Quanto é 2^5?'
-
-    answers = {
-        'a': '0',
-        'b': '2',
-        'c': '16',
-        'd': '32',
-        'e': '128',
-    }
-    sorted_answers = {key: answers[key] for key in sorted(answers)}
-
     context = {
-        'question_text': text,
-        'answers': sorted_answers,
+        'question': Question.objects.first()
     }
 
     return render(request, 'question/question.html', context=context)
