@@ -24,4 +24,4 @@ class QuestionFactory(factory.django.DjangoModelFactory):
     option_D = "4"
     option_E = "5"
 
-    correct_option = 'B'
+    correct_option = "B"
