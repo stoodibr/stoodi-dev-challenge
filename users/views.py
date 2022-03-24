@@ -15,6 +15,7 @@ class RegistrationView(FormView):
     form_class = UserCreationForm
 
     def form_valid(self, form):
+        self.object = form.save()
         new_user = authenticate(username=form.cleaned_data['username'],
                                     password=form.cleaned_data['password1'],
                                     )
