@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
 
     'question',
+    'users',
 )
 
 MIDDLEWARE = (
@@ -75,6 +76,7 @@ TEMPLATES = [
     },
 ]
 
+LOGIN_REDIRECT_URL = '/log-questoes/'
 WSGI_APPLICATION = 'selecao.wsgi.application'
 
 
