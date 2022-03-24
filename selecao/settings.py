@@ -76,6 +76,7 @@ TEMPLATES = [
     },
 ]
 
+LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/log-questoes/'
 WSGI_APPLICATION = 'selecao.wsgi.application'
 

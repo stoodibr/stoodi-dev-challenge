@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.conf import settings
 
 QUESTION_OPTION_CHOICES = (
     ("A", "Option A"),
@@ -80,13 +80,16 @@ class Question(models.Model):
 class QuestionSubmission(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     question = models.ForeignKey(
-        'Question',
+        "Question",
         on_delete=models.CASCADE,
     )
     submitted_answer = models.CharField(
         max_length=1,
         choices=QUESTION_OPTION_CHOICES,
-        help_text="This is the answer that the user submited for the provided question"
+        help_text="This is the answer that the user submited for the provided question",
+    )
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL, blank=True, null=True, on_delete=models.CASCADE
     )
 
     def is_correct_answer(self):

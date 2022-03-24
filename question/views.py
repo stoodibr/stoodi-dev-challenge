@@ -2,7 +2,10 @@
 from curses.ascii import HT
 from django.shortcuts import render
 from django.views import View
+from django.views.generic.list import ListView
 from django.http import HttpResponseNotFound, HttpResponseBadRequest
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 
 from question.models import Question, QuestionSubmission
 
@@ -38,8 +41,14 @@ class QuestionView(View):
             return HttpResponseNotFound("Question does not exist.")
 
         answer = request.POST.get("answer")
-        submission = QuestionSubmission.objects.create(question_id=question_id, submitted_answer=answer)
-
+        if request.user.is_anonymous:
+            submission = QuestionSubmission.objects.create(
+                question_id=question_id, submitted_answer=answer
+            )
+        else:
+            submission = QuestionSubmission.objects.create(
+                question_id=question_id, submitted_answer=answer, author=request.user
+            )
         try:
             is_correct = submission.is_correct_answer()
         except KeyError:
@@ -51,3 +60,16 @@ class QuestionView(View):
             "next_question_id": question.get_next_question_id(),
         }
         return render(request, self.answer_template_name, context=context)
+
+
+class QuestionSubmissionListView(ListView):
+    model = QuestionSubmission
+    template_name = "question/answers-history.html"
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
+
+    def get_queryset(self):
+        queryset = super().get_queryset().filter(author=self.request.user)
+        return queryset

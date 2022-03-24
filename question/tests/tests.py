@@ -9,7 +9,8 @@ from question.tests.factories import (
     WRONG_OPTIONS,
 )
 
-INVALID_OPTION= 'Z'
+INVALID_OPTION = "Z"
+
 
 class TestQuestionModel(TestCase):
     def test_get_ordered_options(self):
@@ -78,10 +79,12 @@ class TestQuestionView(TestCase):
             "Question does not exist.",
             status_code=404,
         )
-    
+
     def test_post_question_correct_answer(self):
         question = QuestionFactory()
-        response = self.client.post("/", {"question_id": question.id, "answer": CORRECT_OPTION})
+        response = self.client.post(
+            "/", {"question_id": question.id, "answer": CORRECT_OPTION}
+        )
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "question/answer.html")
         self.assertEqual(response.context["is_correct"], True)
@@ -91,7 +94,9 @@ class TestQuestionView(TestCase):
 
     def test_post_question_wrong_answer(self):
         question = QuestionFactory()
-        response = self.client.post("/", {"question_id": question.id, "answer": random.choice(WRONG_OPTIONS)})
+        response = self.client.post(
+            "/", {"question_id": question.id, "answer": random.choice(WRONG_OPTIONS)}
+        )
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "question/answer.html")
         self.assertEqual(response.context["is_correct"], False)
@@ -101,16 +106,20 @@ class TestQuestionView(TestCase):
 
     def test_post_question_invalid_answer(self):
         question = QuestionFactory()
-        response = self.client.post("/", {"question_id": question.id, "answer": INVALID_OPTION})
+        response = self.client.post(
+            "/", {"question_id": question.id, "answer": INVALID_OPTION}
+        )
         self.assertContains(
             response,
             "The answer provided is not a valid option.",
             status_code=400,
         )
-    
+
     def test_post_invalid_question_id(self):
         question = QuestionFactory()
-        response = self.client.post("/233/", {"question_id": question.id, "answer": INVALID_OPTION})
+        response = self.client.post(
+            "/233/", {"question_id": question.id, "answer": INVALID_OPTION}
+        )
         self.assertContains(
             response,
             "Question does not exist.",

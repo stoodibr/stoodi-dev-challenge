@@ -1,0 +1,10 @@
+<h1>Histõrico de respostas as perguntas</h1>
+
+Texto da questao - Resposta submetida - Se acertou ou nao
+<ul>
+{% for question_submission in object_list %}
+    <li>{{ question_submission.question.text }} - {{ question_submission.submitted_answer }} - {{ question_submission.is_correct_answer }}</li>
+{% empty %}
+    <li>Nenhuma pergunta foi respondida, <a href="{{ request.get_host }}">clique aqui para comecar a responder </a>.</li>
+{% endfor %}
+</ul>
