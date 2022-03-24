@@ -1,7 +1,9 @@
 import factory
 
 
-factory_ordered_options = {"A": "1", "B": "2", "C": "3", "D": "4", "E": "5"}
+FACTORY_ORDERED_OPTIONS = {"A": "1", "B": "2", "C": "3", "D": "4", "E": "5"}
+CORRECT_OPTION = "B"
+WRONG_OPTIONS = ["A", "C", "D", "E"]
 
 
 class QuestionFactory(factory.django.DjangoModelFactory):
@@ -24,4 +26,4 @@ class QuestionFactory(factory.django.DjangoModelFactory):
     option_D = "4"
     option_E = "5"
 
-    correct_option = "B"
+    correct_option = CORRECT_OPTION

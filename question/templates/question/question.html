@@ -8,9 +8,11 @@
         <form method="POST">
             {% csrf_token %}
             <p>{{ question.text}}</p>
-            <input type="hidden" name="question" value="{{ question.id }}"></input>
+            <input type="hidden" name="question_id" value="{{ question.id }}"></input>
             {% for letter,value in question.get_ordered_options.items %}
-                <input type="radio" name="answer" value="{{ letter }}"><b>{{ letter }}.</b> {{ value }}</input><br/>
+                <input type="radio" name="answer" value="{{ letter }}">
+                    <b>{{ letter }}.</b> {{ value }}
+                </input><br/>
             {% endfor %}
 
             <br/>

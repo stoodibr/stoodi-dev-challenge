@@ -13,7 +13,9 @@
 
     <br/>
     <br/>
-    <a href="{% url 'question' %}">Tente novamente</a>
-
+    <a href="{% url 'question' %}{{current_question_id}}">Tente novamente</a>
+    {% if next_question_id %}
+        <a href="{% url 'question' %}{{next_question_id}}">Proxima pergunta</a>
+    {% endif %}
     </body>
 </html>
