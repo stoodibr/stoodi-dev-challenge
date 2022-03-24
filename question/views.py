@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.views import View
 from django.http import HttpResponseNotFound, HttpResponseBadRequest
 
-from question.models import Question
+from question.models import Question, QuestionSubmission
 
 
 class QuestionView(View):
@@ -38,8 +38,10 @@ class QuestionView(View):
             return HttpResponseNotFound("Question does not exist.")
 
         answer = request.POST.get("answer")
+        submission = QuestionSubmission.objects.create(question_id=question_id, submitted_answer=answer)
+
         try:
-            is_correct = question.is_option_correct(answer)
+            is_correct = submission.is_correct_answer()
         except KeyError:
             return HttpResponseBadRequest("The answer provided is not a valid option.")
 
@@ -48,5 +50,4 @@ class QuestionView(View):
             "current_question_id": question_id,
             "next_question_id": question.get_next_question_id(),
         }
-
         return render(request, self.answer_template_name, context=context)

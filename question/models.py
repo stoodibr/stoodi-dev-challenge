@@ -68,8 +68,26 @@ class Question(models.Model):
         if Question.objects.all().count() == 1:
             return None
 
+        # get all questions with primary keys greater than this one
         next_questions = Question.objects.filter(pk__gt=self.pk).order_by("pk")
+
         if next_questions.exists():
             return next_questions.first().id
         else:
             return Question.objects.all().first().id
+
+
+class QuestionSubmission(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+    question = models.ForeignKey(
+        'Question',
+        on_delete=models.CASCADE,
+    )
+    submitted_answer = models.CharField(
+        max_length=1,
+        choices=QUESTION_OPTION_CHOICES,
+        help_text="This is the answer that the user submited for the provided question"
+    )
+
+    def is_correct_answer(self):
+        return self.question.is_option_correct(self.submitted_answer)

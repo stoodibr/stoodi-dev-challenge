@@ -1,5 +1,6 @@
 import random
 from django.test import TestCase
+from question.models import QuestionSubmission
 
 from question.tests.factories import (
     QuestionFactory,
@@ -86,7 +87,7 @@ class TestQuestionView(TestCase):
         self.assertEqual(response.context["is_correct"], True)
         self.assertEqual(response.context["next_question_id"], None)
         self.assertEqual(response.context["current_question_id"], str(question.id))
-
+        self.assertTrue(QuestionSubmission.objects.all().first().is_correct_answer())
 
     def test_post_question_wrong_answer(self):
         question = QuestionFactory()
@@ -96,6 +97,7 @@ class TestQuestionView(TestCase):
         self.assertEqual(response.context["is_correct"], False)
         self.assertEqual(response.context["next_question_id"], None)
         self.assertEqual(response.context["current_question_id"], str(question.id))
+        self.assertFalse(QuestionSubmission.objects.all().first().is_correct_answer())
 
     def test_post_question_invalid_answer(self):
         question = QuestionFactory()
