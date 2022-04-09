@@ -6,7 +6,6 @@ from django.shortcuts import render
 def question(request):
     text = 'Quanto é 2^5?'
 
-    # BUG: as respostas estão ficando fora de ordem
     answers = {
         'a': '0',
         'b': '2',
