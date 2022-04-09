@@ -1,4 +1,5 @@
 #coding: utf8
+from collections import OrderedDict
 from django.shortcuts import render
 
 
@@ -10,13 +11,13 @@ def question(request):
         'a': '0',
         'b': '2',
         'c': '16',
-        'd': '32',
         'e': '128',
+        'd': '32',
     }
 
     context = {
         'question_text': text,
-        'answers': answers,
+        'answers': OrderedDict(sorted(answers.items()))
     }
 
     return render(request, 'question/question.html', context=context)
