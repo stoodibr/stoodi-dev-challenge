@@ -1,31 +1,30 @@
 #coding: utf8
-from collections import OrderedDict
 from django.shortcuts import render
 
-from question.models import Question
+from question.models import Answer, Question
+
 
 def question(request):
-    first_question = Question.objects.first()
-    first_question_dict = first_question.__dict__
+    question_entity = Question.objects.first()
+    answers_list = Answer.list_by_question(question_entity)
 
-    answers = {
-        'a': '0',
-        'b': '2',
-        'c': '16',
-        'e': '128',
-        'd': '32',
-    }
+    question_entity_dict = question_entity.__dict__
     
     context = {
-        'question_text': first_question_dict['description'],
-        'answers': OrderedDict(sorted(answers.items()))
+        'question_id': question_entity_dict['id'],
+        'question_text': question_entity_dict['description'],
+        'answers': answers_list
     }
 
     return render(request, 'question/question.html', context=context)
 
 def question_answer(request):
     answer = request.POST.get('answer', 'z')
-    is_correct = answer == 'd'
+    question_id = request.POST.get('question_id')
+    
+    question_entity = Question.objects.values('correct_alternative').get(id=question_id)
+
+    is_correct = answer == question_entity['correct_alternative']
 
     context = {
         'is_correct': is_correct,

@@ -9,6 +9,8 @@
             {% csrf_token %}
             <p>{{ question_text}}</p>
 
+        	<input type="hidden" name="question_id" value="{{ question_id }}"></input>
+
             {% for letter, value in answers.items %}
                 <input type="radio" name="answer" value="{{ letter }}"><b>{{ letter }}.</b> {{ value }}</input><br/>
             {% endfor %}
