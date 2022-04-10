@@ -20,6 +20,7 @@ class QuestionViewTestCase(TestCase):
         # setup variables
         self.question_id = question_entity.__dict__['id']
         self.next_question_id = next_question_entity.__dict__['id']
+        self.not_found_question_id = 4908
         self.correct_alternative = question_entity.__dict__['correct_alternative']
         self.incorrect_alternative = 'a'
 
@@ -51,6 +52,13 @@ class QuestionViewTestCase(TestCase):
         self.assertTrue('answers' in response.context)
         self.assertTrue('question_id' in response.context)
         self.assertTrue(response.context['question_id'], self.next_question_id)
+    
+    def test_questions_POST_not_found(self):
+        response = self.client.post(self.list_url, {
+            'next_question_id': self.not_found_question_id 
+        })
+
+        self.assertEqual(response.status_code, 404)
 
     def test_question_answer_POST_valid(self):
         response = self.client.post(self.answer_url, {

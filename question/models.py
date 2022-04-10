@@ -1,4 +1,6 @@
 from django.db import models
+from django.utils.timezone import now
+from django.shortcuts import get_object_or_404
 
 class Question(models.Model):
     description = models.TextField()
@@ -6,18 +8,19 @@ class Question(models.Model):
 
     def get_question(question_id):
         if(question_id):
-            return Question.objects.get(id=question_id)
+            return get_object_or_404(Question, id=question_id)
         return Question.objects.first()
 
-    def get_next_question(current_id):
+    def get_next_question_id(current_id):
         next_question = (Question.objects
             .filter(id__gt=current_id)
             .exclude(id=current_id)
             .order_by('id').first())
 
-        if(next_question):
-            return next_question
-        return Question.objects.first()
+        if(next_question == None):
+            next_question = Question.objects.first()
+
+        return next_question.__dict__['id']
 
     def __str__(self):
         return self.description
@@ -38,6 +41,14 @@ class Answer(models.Model):
         return answers_list
 
     def __str__(self):
-        return '%s %s' % (self.alternative, self.description)
+        return 'Alternativa %s: %s' % (self.alternative, self.description)
 
+class LogAnswers(models.Model):
+    answer = models.CharField(max_length=1)
+    is_correct = models.BooleanField(default=False)
+    creation_date = models.DateTimeField(default=now, editable=False)
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return 'Questão %s: %s' % (self.question.__dict__['id'], "Acertou" if self.is_correct else "Errou")
+    
