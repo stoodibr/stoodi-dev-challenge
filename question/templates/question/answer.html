@@ -15,5 +15,10 @@
     <br/>
     <a href="{% url 'question' %}">Tente novamente</a>
 
+    <form action="{% url 'question' %}" method="POST" id="next_question_form">
+        {% csrf_token %}
+        <input type="hidden" name="next_question_id" value="{{ next_question_id }}"></input>
+        <a href="javascript:{}" onclick="document.getElementById('next_question_form').submit();">Próxima Questão</a>
+    </form>
     </body>
 </html>
