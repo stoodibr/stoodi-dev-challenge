@@ -2,9 +2,11 @@
 from collections import OrderedDict
 from django.shortcuts import render
 
+from question.models import Question
 
 def question(request):
-    text = 'Quanto é 2^5?'
+    first_question = Question.objects.first()
+    first_question_dict = first_question.__dict__
 
     answers = {
         'a': '0',
@@ -13,9 +15,9 @@ def question(request):
         'e': '128',
         'd': '32',
     }
-
+    
     context = {
-        'question_text': text,
+        'question_text': first_question_dict['description'],
         'answers': OrderedDict(sorted(answers.items()))
     }
 
