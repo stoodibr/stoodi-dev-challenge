@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Login</title>
+</head>
+
+<body>
+    <form action="{% url 'sign_in' %}" method="POST">
+        {% csrf_token %}
+        <h3>Login</h3>
+        <label for="username">Nome de usuário</label>
+        <input name="username" type="username"></input>
+        <label for="password">Senha</label>
+        <input name="password" type="password"></input>
+        <input type="submit" value="Login">
+    </form>
+
+    <h4>{{ message_text }}</h4>
+
+    {% if success %}
+    <a href="{% url 'question' %}">
+        Práticar algumas questões
+    </a> {% endif %}
+
+    <style>
+        input,
+        label {
+            display: block;
+        }
+        
+        input {
+            margin: 0 0px 8px 0px
+        }
+    </style>
+</body>
+
+</html>

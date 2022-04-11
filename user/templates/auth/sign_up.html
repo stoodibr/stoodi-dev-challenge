@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Cadastro</title>
+</head>
+
+<body>
+    <form action="{% url 'sign_up' %}" method="POST">
+        {% csrf_token %}
+        <h3>Cadastro</h3>
+        <label for="username">Nome de usuário</label>
+        <input name="username"></input>
+        <label for="email">Email</label>
+        <input name="email" type="email"></input>
+        <label for="password">Senha</label>
+        <input name="password" type="password"></input>
+        <input type="submit" value="Cadastrar">
+    </form>
+
+    <h4>{{ message_text }}</h4>
+
+    {% if success %}
+    <a href="{% url 'sign_in' %}">
+        Fazer Login
+    </a> {% endif %}
+
+    <style>
+        input,
+        label {
+            display: block;
+        }
+        
+        input {
+            margin: 0 0px 8px 0px
+        }
+    </style>
+</body>
+
+</html>
