@@ -32,7 +32,11 @@ def question_answer(request):
     next_question_id = Question.get_next_question_id(question_id)
 
     LogAnswers.objects.create(
-        answer=answer, is_correct=is_correct, question=question_entity)
+        answer=answer,
+        is_correct=is_correct,
+        question=question_entity,
+        user=request.user if request.user.is_authenticated else None
+    )
 
     context = {
         'is_correct': is_correct,

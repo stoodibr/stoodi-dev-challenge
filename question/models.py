@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils.timezone import now
 from django.shortcuts import get_object_or_404
+from django.contrib.auth.models import User
+from pkg_resources import require
 
 
 class Question(models.Model):
@@ -52,6 +54,8 @@ class LogAnswers(models.Model):
     is_correct = models.BooleanField(default=False)
     creation_date = models.DateTimeField(default=now, editable=False)
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
         return 'Questão %s: %s' % (self.question.__dict__['id'], "Acertou" if self.is_correct else "Errou")
