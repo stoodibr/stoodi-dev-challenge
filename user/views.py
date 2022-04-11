@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from question.models import LogAnswers, Question
+from django.db.models import Q
 
 
 def sign_in(request):
@@ -36,7 +37,8 @@ def sign_up(request):
         email = request.POST.get('email')
         password = request.POST.get('password')
 
-        user = User.objects.filter(email=email).first()
+        user = User.objects.filter(
+            Q(email=email) | Q(username=username)).first()
         if(user):
             context = {
                 'message_text': 'Usuário já cadastrado! :O',
