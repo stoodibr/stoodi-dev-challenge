@@ -1,6 +1,8 @@
 from django.contrib.auth.models import User
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
+from question.models import LogAnswers, Question
 
 
 def sign_in(request):
@@ -51,3 +53,26 @@ def sign_up(request):
             'success': True
         }
         return render(request, 'auth/sign_up.html', context=context)
+
+
+@login_required(login_url='/login')
+def user_log(request):
+    data = LogAnswers.objects.filter(
+        user=request.user).order_by('creation_date')
+
+    for item in data.values():
+        item['question'] = Question.objects.get(id=item['question_id'])
+
+    headers = [
+        'Questão',
+        'Resposta',
+        'Resultado',
+        'Resposta correta',
+        'Data da tentativa',
+    ]
+    context = {
+        'headers': headers,
+        'data': data
+    }
+
+    return render(request, 'log.html', context=context)

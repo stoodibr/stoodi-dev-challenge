@@ -16,6 +16,10 @@
         <input type="submit" value="Login">
     </form>
 
+    <a href="{% url 'sign_up' %}">
+        Ainda não tem uma conta?
+    </a>
+
     <h4>{{ message_text }}</h4>
 
     {% if success %}

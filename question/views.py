@@ -1,12 +1,11 @@
 #coding: utf8
-from asyncio.windows_events import NULL
 from django.shortcuts import render
 
 from question.models import Answer, LogAnswers, Question
 
 
 def question(request):
-    question_id = NULL
+    question_id = None
     if(request.method == 'POST'):
         question_id = request.POST.get('question_id')
 

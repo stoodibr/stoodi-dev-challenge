@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Log de Questões</title>
+</head>
+
+<body>
+    <table>
+        <caption>Log das questões</caption>
+        <thead>
+            <tr>
+                {% for item in headers %}
+                <th>{{item}}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in data %}
+            <tr>
+                <td>
+                    <form action="{% url 'question' %}" method="POST" id="form_question_{{item.id}}">
+                        {% csrf_token %}
+                        <input type="hidden" name="question_id" value="{{ item.question.id }}"></input>
+                        <a href="javascript:{}" onclick="document.getElementById('form_question_{{item.id}}').submit();">{{item.question.id}}</a>
+                    </form>
+                </td>
+                <td>{{item.answer}}</td>
+                <td>
+                    {% if item.is_correct %} Acertou! {% else %} Errou! {% endif %}
+                </td>
+                <td>{{item.question.correct_alternative}}</td>
+                <td>{{item.creation_date | date:'d/m/Y H:i'}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <style>
+        table {
+            margin: 0 auto;
+            border: 1px solid grey;
+            font-size: 12pt;
+        }
+        
+        table thead th {
+            color: #777;
+            background: rgba(0, 0, 0, .1);
+        }
+        
+        table th,
+        table td {
+            padding: .5em;
+            border: 1px solid lightgrey;
+            text-align: center;
+        }
+        
+        caption {
+            font-size: 18px;
+            margin: 15px 0px;
+        }
+    </style>
+</body>
+
+</html>

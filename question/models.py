@@ -2,7 +2,6 @@ from django.db import models
 from django.utils.timezone import now
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
-from pkg_resources import require
 
 
 class Question(models.Model):
