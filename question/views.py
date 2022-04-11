@@ -6,7 +6,7 @@ from question.models import Answer, LogAnswers, Question
 
 
 def question(request):
-    question_id= NULL
+    question_id = NULL
     if(request.method == 'POST'):
         question_id = request.POST.get('question_id')
 
@@ -22,15 +22,17 @@ def question(request):
         return render(request, 'question/question.html', context=context)
     return render(request, 'question/no_question_available.html')
 
+
 def question_answer(request):
     answer = request.POST.get('answer', 'z')
     question_id = request.POST.get('question_id')
-    
+
     question_entity = Question.objects.get(id=question_id)
     is_correct = answer == question_entity.__dict__['correct_alternative']
     next_question_id = Question.get_next_question_id(question_id)
-    
-    LogAnswers.objects.create(answer=answer,is_correct=is_correct,question=question_entity)
+
+    LogAnswers.objects.create(
+        answer=answer, is_correct=is_correct, question=question_entity)
 
     context = {
         'is_correct': is_correct,
