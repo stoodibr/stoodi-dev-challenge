@@ -64,3 +64,44 @@ questão do banco.
 - História 8:
   - Para usuário logados, crie uma página com o log de todas as questões feitas pelo usuário em "/log-questoes/".
 
+
+## Informações
+  - Nome: Cezar Augusto Barbosa de Souza
+  - Email: cezaraugusto0406@gmail.com
+
+## Observações Técnicas (ou quase isso)
+
+- História 1:
+
+  - Segundo algumas pesquisas que realizei, a partir da versão 3.6/3.7 do Python não deveria estar ocorrendo o bug (versão 3.8.5 no Dockerfile), visto que os objetos do tipo dict mantém seus itens ordenados. Mas, ainda sim, mantive uma forma para garantir o dicionário ordenado com uma subclasse que era utilizada para esse fim antes dessas versões do Python.
+  - Referências que li a respeito:
+    - https://www.geeksforgeeks.org/ordereddict-in-python/
+    - https://realpython.com/python-ordereddict/
+
+- História 2:
+
+  - A modelagem que propus considera somente uma alternativa correta para cada pergunta (Question). Em caso de múltiplas escolhas corretas, podemos elaborar uma tabela auxiliar para as repostas corretas de cada pergunta ou adicionar uma coluna indicando se a resposta e correta ou não na tabela de respostas (Answers)
+
+- História 3: 
+
+  - Fiquei em dúvida se realmente deveria colocar as função de list e get dentro dos Models, normalmente estou acostumado a usar um service ou coisa do tipo que faz essas queries mais complexas, mas no fim deixei lá mesmo por praticidade 
+
+- História 4: 
+
+  - Pensei em utilizar uma outra coluna no banco para fazer a sequencia das questões, mas aí acabei utilizando a coluna Id mesmo para fazer essa sequencia, uma vez que o Id está como incremental do tipo Inteiro. Se fosse de um tipo Guid por exemplo acredito que teria adicionado a coluna extra sim :D 
+
+- História 5:
+
+  - A principio sempre fiz os logs de qualquer rota em um middleware (o django também tem pelo que pesquisei), mas esse não vi muita saída sem ser fazer na view mesmo. Se tiver como fazer fora da view seria legal aprender depois 
+
+- História 6:
+
+  - Achei bem interessante que o Django já tem uma autenticação simples prontinha para uso. Ia fazer a autenticação com email e senha de inicio, mas vi que teria que criar uma classe de CustomAuthentication, aí acabei deixando com o username e a senha mesmo
+
+- História 7:
+
+  - Nessa história aqui aprendi o comando pra dar rollback das migrations, bem legal :)
+
+- História 8:
+
+  - O decorator que utilizei na api de log do usuário - login_required - (que inclusive está na documentação) retorna o código de erro 302 (redirecionamento de página), que me pareceu bem estranho porque normalmente uma rota que necessita de autenticação retorna o código de erro 403. Intrigante :O 
