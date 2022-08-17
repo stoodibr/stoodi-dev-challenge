@@ -1,22 +1,22 @@
 #coding: utf8
 from django.shortcuts import render
-
+from .models import Question, Alternatives
 
 def question(request):
-    text = 'Quanto é 2^5?'
-
-    answers = {
-        'a': '0',
-        'b': '2',
-        'c': '16',
-        'd': '32',
-        'e': '128',
-    }
+    questions = Question.objects.all()
     
     context = {
-        'question_text': text,
-        'answers': dict(sorted(answers.items(), key=lambda item: item[0]))
-    }
+        "questions":[]
+        }
+    
+    for question in questions:
+        alternatives = Alternatives.objects.filter(question=question)
+        context['questions'].append(
+            {
+                "question":question,
+                "alternatives":alternatives
+            }
+        )
 
     return render(request, 'question/question.html', context=context)
 

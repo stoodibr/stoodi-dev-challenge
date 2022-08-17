@@ -7,10 +7,12 @@
     <body>
         <form action="{% url 'question_answer' %}" method="POST">
             {% csrf_token %}
-            <p>{{ question_text}}</p>
+            {% for question in questions %}
+            <p>{{ question.question }}</p>
 
-            {% for letter, value in answers.items %}
-                <input type="radio" name="answer" value="{{ letter }}"><b>{{ letter }}.</b> {{ value }}</input><br/>
+                {% for alternative in question.alternatives %}
+                    <input type="radio" name="answer" value="{{ alternative.alternative_order }}"><b>{{ alternative.alternative_order }}.</b> {{ alternative }}</input><br/>
+                {% endfor %}
             {% endfor %}
 
             <br/>
