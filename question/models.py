@@ -52,3 +52,32 @@ class Questao(models.Model):
             self.enunciado
         )
 
+
+class Resposta(models.Model):
+
+    questao = models.ForeignKey(
+        'Questao',
+        related_name='log_respostas',
+        null=True,
+        on_delete=models.SET_NULL)
+    data_resposta = models.DateTimeField(
+        'Data de cadastro da resposta',
+        null=True,
+        blank=True,
+        auto_now_add=True,
+        editable=False)
+    alternativa_escolhida = models.CharField(
+        max_length=1, blank=False, null=False )
+    alternativa_correta = models.BooleanField(
+        help_text="A alternativa escolhida está correta?",
+        default=False)
+    
+    class Meta:
+        verbose_name = 'Resposta'
+        verbose_name_plural = 'Respostas'
+        ordering = ['data_resposta']
+
+    def __str__(self):
+        return '{}'.format(
+            self.data_resposta
+        )

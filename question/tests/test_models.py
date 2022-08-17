@@ -1,6 +1,6 @@
 import pytest
 
-from question.models import Questao
+from question.models import Questao, Resposta
 
 
 @pytest.fixture
@@ -54,3 +54,32 @@ def test_questao_create_object():
     )
     assert Questao.objects.count() == 1
 
+
+@pytest.fixture
+def create_resposta_db(db, create_questao):
+    questao = create_questao
+    resposta = Resposta.objects.create(
+        questao = questao,
+        alternativa_escolhida = 'e',
+        alternativa_correta = True,
+    )
+    return resposta
+
+
+@pytest.mark.django_db
+def test_str_resposta(create_resposta_db):
+    resposta = create_resposta_db
+    assert str(resposta) == '{}'.format(resposta.data_resposta)
+
+@pytest.mark.django_db
+def test_save_resposta_db_count(create_resposta_db):
+    resposta = create_resposta_db
+    assert Resposta.objects.count() == 1
+
+@pytest.mark.django_db
+def test_fields_resposta(create_resposta_db, create_questao):
+    questao = create_questao
+    resposta = create_resposta_db
+    assert resposta.questao == questao
+    assert resposta.alternativa_escolhida == 'e'
+    assert resposta.alternativa_correta == True
