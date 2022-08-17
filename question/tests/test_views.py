@@ -45,5 +45,15 @@ def test_check_question_data(client, create_questao):
     assert questao.numero == question_num
 
 
+@pytest.mark.django_db
+def test_answers_by_database(client, create_questao):
+    questao = create_questao
+    url_str = reverse('question_answer')
 
+    data = client.post(url_str, data={'identificador':questao.identificador, 'answer': 'c'})
 
+    questao_db = data.context['questao']
+    answer = data.context['answer']
+
+    assert  questao_db.pk == questao.pk
+    assert  answer == questao.alternativa_correta

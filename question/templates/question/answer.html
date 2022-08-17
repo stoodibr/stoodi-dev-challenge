@@ -1,13 +1,23 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Resposta</title>
-    </head>
 
-    <body>
+<head>
+    <title>Resposta</title>
+</head>
+
+<body>
+    Questão: {{questao.numero}}
+    <br/>
+    <br/>
+    {{questao.enunciado}} <br/>
+    <br/>
     {% if is_correct %}
+        Alternativa selecionada: ({{questao.alternativa_correta}})
+        <br/>
         Resposta correta!
     {% else %}
+        Alternativa selecionada: ({{answer}})
+        <br/>
         Resposta errada!
     {% endif %}
 
@@ -15,5 +25,6 @@
     <br/>
     <a href="{% url 'question' %}">Tente novamente</a>
 
-    </body>
+</body>
+
 </html>
