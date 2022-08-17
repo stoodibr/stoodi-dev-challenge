@@ -5,7 +5,6 @@ from django.shortcuts import render
 def question(request):
     text = 'Quanto é 2^5?'
 
-    # BUG: as respostas estão ficando fora de ordem
     answers = {
         'a': '0',
         'b': '2',
@@ -13,10 +12,10 @@ def question(request):
         'd': '32',
         'e': '128',
     }
-
+    
     context = {
         'question_text': text,
-        'answers': answers,
+        'answers': dict(sorted(answers.items(), key=lambda item: item[0]))
     }
 
     return render(request, 'question/question.html', context=context)
