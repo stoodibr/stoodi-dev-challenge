@@ -1,7 +1,7 @@
 #coding: utf8
 from django.http import Http404
 from django.shortcuts import get_object_or_404, render
-from .models import Questao
+from .models import Questao, Resposta
 
 def question(request, questao_identficador=None):
     if questao_identficador:
@@ -48,6 +48,11 @@ def question_answer(request):
         ativa=True
         ).order_by('numero', 'pk').first()
     
+    Resposta.objects.create(
+        questao=questao,
+        alternativa_escolhida=answer,
+        alternativa_correta=is_correct)
+
     context = {
         'proxima_questao': proximo,
         'questao': questao,

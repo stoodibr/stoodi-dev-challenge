@@ -1,7 +1,7 @@
 import pytest
 from django.urls import reverse
 
-from question.models import Questao
+from question.models import Questao, Resposta
 
 
 @pytest.fixture
@@ -82,3 +82,13 @@ def test_answers_whith_next_question(client):
     assert Questao.objects.count() == 2
     assert proxima_questao1 == questao2
     assert proxima_questao2 == questao1
+
+
+@pytest.mark.django_db
+def test_resposta_generate_by_answer(client, create_questao):
+    questao = create_questao
+    url_str = reverse('question_answer')
+
+    data = client.post(url_str, data={'identificador':questao.identificador, 'answer': 'c'})
+
+    assert Resposta.objects.count() == 1
