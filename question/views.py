@@ -1,21 +1,22 @@
 #coding: utf8
 from django.shortcuts import render
-
+from .models import Questao
 
 def question(request):
-    text = 'Quanto é 2^5?'
 
-    # BUG: as respostas estão ficando fora de ordem
+    questao = Questao.objects.first()
+
     answers = {
-        'a': '0',
-        'c': '16',
-        'b': '2',
-        'd': '32',
-        'e': '128',
+        'a': questao.alternativa_a,
+        'b': questao.alternativa_b,
+        'c': questao.alternativa_c,
+        'd': questao.alternativa_d,
+        'e': questao.alternativa_e,
     }
 
     context = {
-        'question_text': text,
+        'question_num': questao.numero,
+        'question_text': questao.enunciado,
         'answers': dict(sorted(answers.items())),
     }
 
