@@ -57,3 +57,28 @@ def test_answers_by_database(client, create_questao):
 
     assert  questao_db.pk == questao.pk
     assert  answer == questao.alternativa_correta
+
+
+@pytest.mark.django_db
+def test_answers_whith_next_question(client):
+    questao1 = Questao.objects.create(
+        numero = 1, enunciado = 'Qual a soma de 2 + 2?',
+        alternativa_a = '9', alternativa_b = '22', alternativa_c = '7', alternativa_d = '4',
+        alternativa_e = '1212', alternativa_correta = 'd', ativa = True,
+    )
+    questao2 = Questao.objects.create(
+        numero = 2, enunciado = 'Qual a soma de 2 + 2?',
+        alternativa_a = '9', alternativa_b = '22', alternativa_c = '7', alternativa_d = '4',
+        alternativa_e = '1212', alternativa_correta = 'd', ativa = True,
+    )
+    url_str = reverse('question_answer')
+
+    dados1 = client.post(url_str, data={'identificador':questao1.identificador, 'answer': 'd'})
+    proxima_questao1 = dados1.context['proxima_questao']
+
+    dados2 = client.post(url_str, data={'identificador':questao2.identificador, 'answer': 'd'})
+    proxima_questao2 = dados2.context['proxima_questao']
+
+    assert Questao.objects.count() == 2
+    assert proxima_questao1 == questao2
+    assert proxima_questao2 == questao1
