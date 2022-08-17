@@ -1,21 +1,8 @@
 # PROCESSO DE SELEÇÃO DE PESSOA DESENVOLVEDORA
-
-Se você não tem experiência com o Django, recomendamos que você faça pelo menos
-este tutorial antes de começar:
-https://docs.djangoproject.com/en/3.1/intro/tutorial01/
-
-Neste repositório, encontra-se o código de um sistema simples desenvolvido em
-Django(3.1.X). O sistema consiste em uma página que contém uma questão de
-múltipla escolha, ao respondê-la o usuário recebe um feedback de acerto ou erro.
-
-
-## Para participar desta parte do processo você deve:
-- Clonar esse repositório;
-- Criar uma branch com o nome observando o padrão `desafio-nome-sobrenome` (por exemplo: `desafio-maria-silva`);
-- Desenvolver as histórias abaixo na branch que você criou, de preferência com pelo menos um commit na finalização de cada história;
-- Colocar no arquivo Readme: seu nome, email e outras observações que julgar adequadas;
-- Ao terminar o desenvolvimento, abra um pull request para a branch `master`. Se não tiver permissão, nos informe seu usuário do Github;
-- Nos avise por email quando concluir.
+- Artur Felipe da Silva Veloso
+- arturfdasveloso@gmail.com
+- (86) 99927-2370
+- Teresina/PI
 
 ## Considerações:
 - Se não for possível fazer todas as histórias, entregue apenas as histórias que você fez.
