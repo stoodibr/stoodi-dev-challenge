@@ -1,10 +1,19 @@
 #coding: utf8
+from django.http import Http404
 from django.shortcuts import get_object_or_404, render
 from .models import Questao
 
-def question(request):
+def question(request, questao_identficador=None):
+    if questao_identficador:
+        questao = get_object_or_404(Questao, identificador=questao_identficador, ativa=True)
+    else:
+        questao = Questao.objects.filter(
+            ativa=True
+            ).order_by('numero', 'pk').first()
 
-    questao = Questao.objects.first()
+    if not questao:
+        raise Http404
+
     answers = {
         'a': questao.alternativa_a,
         'b': questao.alternativa_b,
@@ -28,7 +37,19 @@ def question_answer(request):
     answer = request.POST.get('answer', 'Nenhuma')
 
     is_correct = answer == questao.alternativa_correta
+    
+    proximo = Questao.objects.filter(
+        ativa=True, 
+        numero__gte=questao.numero,
+        ).exclude(pk=questao.pk).order_by('numero', 'pk').first()
+
+    if not proximo:
+        proximo =  Questao.objects.filter(
+        ativa=True
+        ).order_by('numero', 'pk').first()
+    
     context = {
+        'proxima_questao': proximo,
         'questao': questao,
         'answer': answer,
         'is_correct': is_correct,

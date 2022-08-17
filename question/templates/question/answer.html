@@ -8,22 +8,19 @@
 <body>
     Questão: {{questao.numero}}
     <br/>
-    <br/>
-    {{questao.enunciado}} <br/>
-    <br/>
-    {% if is_correct %}
-        Alternativa selecionada: ({{questao.alternativa_correta}})
-        <br/>
-        Resposta correta!
-    {% else %}
-        Alternativa selecionada: ({{answer}})
-        <br/>
-        Resposta errada!
-    {% endif %}
+    <br/> {{questao.enunciado}} <br/>
+    <br/> {% if is_correct %} Alternativa selecionada: ({{questao.alternativa_correta}})
+    <br/> Resposta correta! {% else %} Alternativa selecionada: ({{answer}})
+    <br/> Resposta errada! {% endif %}
 
     <br/>
     <br/>
-    <a href="{% url 'question' %}">Tente novamente</a>
+    <a href="{% url 'question_idenficated' questao.identificador %}">Tente novamente</a>
+    <br/>
+    <br/>
+    {% if proxima_questao.identificador != questao.identificador %}
+        <a href="{% url 'question_idenficated' proxima_questao.identificador %}">Próxima questão</a>
+    {% endif%}
 
 </body>
 

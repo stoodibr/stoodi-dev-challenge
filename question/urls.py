@@ -6,6 +6,6 @@ from . import views
 
 urlpatterns = [
     re_path(r'^$', views.question, name='question'),
+    path('<uuid:questao_identficador>', views.question, name='question_idenficated'),
     re_path(r'^resposta/$', views.question_answer, name='question_answer'),
-
 ]
