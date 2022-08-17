@@ -8,15 +8,15 @@ def question(request):
     # BUG: as respostas estão ficando fora de ordem
     answers = {
         'a': '0',
-        'b': '2',
         'c': '16',
+        'b': '2',
         'd': '32',
         'e': '128',
     }
 
     context = {
         'question_text': text,
-        'answers': answers,
+        'answers': dict(sorted(answers.items())),
     }
 
     return render(request, 'question/question.html', context=context)
