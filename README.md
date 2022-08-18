@@ -4,6 +4,10 @@
 - (86) 99927-2370
 - Teresina/PI
 
+## Observações sobre o projeto
+- A primeira página não é mais a home = http://127.0.0.1:8000/ agora começará por
+http://127.0.0.1:8000/1/ pois enumerei as questões e passo seu ID como parâmetro
+
 ## Considerações:
 - Se não for possível fazer todas as histórias, entregue apenas as histórias que você fez.
 - Você será avaliado tanto pelas funcionalidade do seu código quanto pela utilização de boas práticas, desenvolva como se fosse um código de produção em um time e não uma prova ou script.
