@@ -1,3 +1,58 @@
 from django.db import models
+from django.contrib.auth.models import User
 
-# Create your models here.
+# Models
+class Question(models.Model):
+    question_text = models.TextField(verbose_name="Questão")
+    
+    def __str__(self):
+        return self.question_text
+
+    class Meta:
+        ordering = ('pk',)
+        verbose_name = 'Questão'
+        verbose_name_plural = 'Questões'
+        
+class Alternatives(models.Model):
+    alternative_order = models.CharField(max_length=4, verbose_name="Alternativa")
+    question = models.ForeignKey(
+        'Question', 
+        on_delete=models.CASCADE, 
+        verbose_name="Questão"
+    )
+    alternative_text = models.TextField(verbose_name="Questão")
+    is_correct = models.BooleanField(
+        verbose_name="Está correta?", 
+        default=False
+    )
+    
+    def __str__(self):
+        return self.alternative_text
+
+    class Meta:
+        ordering = ('alternative_order',)
+        verbose_name = 'Alternativa'
+        verbose_name_plural = 'Alternativas'
+        
+class QuestionLogs(models.Model):
+    user = models.ForeignKey(User, verbose_name="Usuário", on_delete=models.CASCADE, null=True, blank=True)
+    
+    question = models.ForeignKey(
+        'Question', 
+        on_delete=models.CASCADE, 
+        verbose_name="Questão"
+    )
+    chosen_alternative = models.CharField(max_length=4, verbose_name="Alternativa", null=True, blank=True)
+    is_correct = models.BooleanField(
+        verbose_name="Está correta?", 
+        default=False
+    )
+    answer_date = models.DateField(null=True, blank=True)
+    
+    def __str__(self):
+        return self.question.question_text
+
+    class Meta:
+        ordering = ('pk',)
+        verbose_name = 'Log'
+        verbose_name_plural = 'Logs'

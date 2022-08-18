@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Questão 1</title>
+        <title>Questão {{ questions.question_complete.id }}</title>
     </head>
 
     <body>
         <form action="{% url 'question_answer' %}" method="POST">
             {% csrf_token %}
-            <p>{{ question_text}}</p>
+            <p>{{ questions.question }}</p>
 
-            {% for letter, value in answers.items %}
-                <input type="radio" name="answer" value="{{ letter }}"><b>{{ letter }}.</b> {{ value }}</input><br/>
+            {% for alternative in questions.alternatives %}
+                <input type="radio" name="answer" value="{{ alternative.id }}"><b>{{ alternative.alternative_order }}.</b> {{ alternative }}</input><br/>
             {% endfor %}
 
             <br/>
