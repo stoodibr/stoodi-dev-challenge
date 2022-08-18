@@ -10,4 +10,6 @@ urlpatterns = [
         views.question, name='question_idenficated'),
     path('resposta/', 
         views.question_answer, name='question_answer'),
+    path('log-questoes/', 
+        views.log_usuario_questoes, name='log_questoes'),
 ]

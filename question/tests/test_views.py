@@ -106,3 +106,29 @@ def test_resposta_generate_by_answer_authenticated(client, create_questao, creat
     data = client.post(url_str, data={'identificador':questao.identificador, 'answer': 'c'})
 
     assert Resposta.objects.count() == 1
+
+
+@pytest.mark.django_db
+def test_status_code_log_questoes_url_not_autenticated(client):
+    url_str = reverse('log_questoes')
+    response = client.get(url_str)
+    assert response.status_code != 200
+
+
+@pytest.mark.django_db
+def test_status_code_log_questoes_url_autenticated(client, create_user, create_questao):
+    questao = create_questao
+
+    url_login_str = reverse('login')
+    data = client.post(url_login_str, data={
+        'username':'user_test', 'password': 'pass_test'})
+
+    url_str_resposta = reverse('question_answer')
+    data = client.post(url_str_resposta, data={'identificador':questao.identificador, 'answer': 'c'})
+
+    url_str = reverse('log_questoes')
+    response = client.get(url_str)
+    respostas_lista = response.context['respostas']
+
+    assert len(respostas_lista) == 1
+    assert response.status_code == 200

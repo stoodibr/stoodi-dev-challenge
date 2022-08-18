@@ -1,4 +1,5 @@
 #coding: utf8
+from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.shortcuts import get_object_or_404, render
 from .models import Questao, Resposta
@@ -62,3 +63,12 @@ def question_answer(request):
         'is_correct': is_correct,
     }
     return render(request, 'question/answer.html', context=context)
+
+
+@login_required
+def log_usuario_questoes(request):
+    logs_questoes = request.user.minhas_respostas.all()
+    context = {
+        'respostas': logs_questoes,
+    }
+    return render(request, 'question/log_questoes.html', context=context)
