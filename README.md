@@ -17,11 +17,12 @@ Mais informações:
 
 ###### Instalar pacotes pip:
 
-    `	$pip install -r requirements.tx`
+	pip install -r requirements.tx
 
 Para segurança do projeto e separação de configuracões  de códigos é recomendado que se faça o seguinte passo:
 
-    Criar o arquivo de nome` .env`  na raiz do projeto (mesmo nível do manage.py) e definir as variáveis dinâmicas conforme a seguir:
+    Criar o arquivo de nome .env  na raiz do projeto (mesmo nível do manage.py) 
+    e definir as variáveis dinâmicas conforme a seguir:
 
 ###### #Conteudo exemplo .env file
 
@@ -38,14 +39,14 @@ ALLOWED_HOSTS=127.0.0.1, .localhost, .meudominio.com
 
 ###### Executar testes no projeto:
 
-`	pytest -v `
+	pytest -v
 
 Executar projeto:
-`	python manage.py runserver`
+	python manage.py runserver
 
 Acessar sistema:
 
-    [http://localhost:8000/](http://localhost:8000/)
+    http://localhost:8000/
 
 Acesso aos dados do banco de dados sqlite de testes:
 
