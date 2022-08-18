@@ -3,6 +3,15 @@ from django.shortcuts import render, redirect
 from .models import Question, Alternatives, QuestionLogs
 import datetime
 
+def home(request):
+    questions = Question.objects.all().first()
+    
+    if questions:
+        return redirect('question', questions.id)
+    else:
+        context = {}
+        return render(request, 'question/question.html', context=context)
+
 def question(request, id):
     questions = Question.objects.get(id=id)
     
@@ -48,5 +57,5 @@ def question_answer(request):
         
         return render(request, 'question/answer.html', context=context)
     except:
-        return redirect('question', id=1)
+        return redirect('question_home')
     

@@ -47,7 +47,7 @@ class QuestionLogs(models.Model):
     answer_date = models.DateField(null=True, blank=True)
     
     def __str__(self):
-        return self.alternative_text
+        return self.question.question_text
 
     class Meta:
         ordering = ('pk',)

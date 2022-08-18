@@ -13,9 +13,14 @@
 
     <br/>
     <br/>
+
+    {% call catch('') %}
+    {% if id and next %}
     <a href="{% url 'question' id %}">Tente novamente</a>
 
     <a href="{% url 'question' next %}">Próxima questão</a>
-
+    {% endfor %}
+    {% endcall %}
+    
     </body>
 </html>
