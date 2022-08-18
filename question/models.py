@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Models
 class Question(models.Model):
@@ -34,6 +35,8 @@ class Alternatives(models.Model):
         verbose_name_plural = 'Alternativas'
         
 class QuestionLogs(models.Model):
+    user = models.ForeignKey(User, verbose_name="Usuário", on_delete=models.CASCADE, null=True, blank=True)
+    
     question = models.ForeignKey(
         'Question', 
         on_delete=models.CASCADE, 

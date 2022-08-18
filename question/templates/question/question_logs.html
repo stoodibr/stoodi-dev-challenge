@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Logs</title>
+    </head>
+
+    <body>
+        <h1>Logs de respostas do usuário: {{ user }}</h1>
+            {% for log in logs %}
+                <p>{{ log.user }} | {{ log.question }} | {{ log.chosen_alternative }} | {% if log.is_correct %} Correto {% else %} Errado {% endif %} | {{ log.answer_date }}</p>
+            {% endfor %}
+            <a href="{% url 'question_home' %}">Home</a>
+        </form>
+    </body>
+</html>

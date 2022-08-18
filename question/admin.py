@@ -16,6 +16,7 @@ class AlternativesAdmin(admin.ModelAdmin):
 @admin.register(QuestionLogs)
 class QuestionLogsAdmin(admin.ModelAdmin):
     list_display = (
+        'user',
         'question',
         'chosen_alternative',
         'is_correct',

@@ -38,24 +38,48 @@ def question_answer(request):
 
         context = {
             'is_correct': alternative.is_correct,
-            'id': alternative.question.id
+            'id': alternative.question.id,
+            'user_logged': request.user.is_authenticated
         }
         
         if alternative.question.id < len(questions):
             context['next'] = alternative.question.id + 1
         else:
-            context['next'] = 1
+            questions = Question.objects.all().first()
+            context['next'] = questions.id
         
         question = Question.objects.get(id=alternative.question.id)
         
-        QuestionLogs.objects.create(
-            question = question,
-            chosen_alternative = alternative.alternative_order,
-            is_correct = alternative.is_correct,
-            answer_date = datetime.date.today()
-        )
+        if request.user.is_authenticated:
+            QuestionLogs.objects.create(
+                user = request.user,
+                question = question,
+                chosen_alternative = alternative.alternative_order,
+                is_correct = alternative.is_correct,
+                answer_date = datetime.date.today()
+            )
+        else:
+            QuestionLogs.objects.create(
+                question = question,
+                chosen_alternative = alternative.alternative_order,
+                is_correct = alternative.is_correct,
+                answer_date = datetime.date.today()
+            )
         
         return render(request, 'question/answer.html', context=context)
     except:
         return redirect('question_home')
+
+def logs(request):
     
+    if request.user.is_authenticated:
+        logs = QuestionLogs.objects.filter(user=request.user)
+        
+        context = {
+                'user': request.user,
+                'logs': logs
+            }
+        
+        return render(request, 'question/question_logs.html', context=context)
+    else:
+        return redirect('question_home')

@@ -1,4 +1,5 @@
 from django.test import TestCase
+from .models import Question, Alternatives
 
 # Tests
 class TestViewQuestion(TestCase):
@@ -32,8 +33,16 @@ class TestViewQuestion(TestCase):
     def test_answer_order_feature(self):
         response_question = self.client.get('')
         
+        question = Question(
+            question_text = 'Quanto é 2^5?'
+        )
+        
+        alternatives = Alternatives(
+            question_text = 'Quanto é 2^5?'
+        )
+        
         # Test if the keys are in order
         self.assertEqual(
             ["a", "b", "c", "d", "e"],
-            list(response_question.context["answers"].keys())
+            list(response_question.context["questions"][0].keys())
         )
