@@ -6,6 +6,15 @@
 </head>
 
 <body>
+    {% if request.user %}
+        {% if not request.user.is_anonymous %}
+            {{user}} - <a href="{% url 'logout' %}">Sair</a>
+        {% else %}
+            <a href="{% url 'login' %}">Login</a>
+        {% endif %}
+    {% endif %}
+    <br/>
+    <br/>
     Questão: {{questao.numero}}
     <br/>
     <br/> {{questao.enunciado}} <br/>

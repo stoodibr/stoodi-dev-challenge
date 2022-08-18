@@ -1,21 +1,31 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Questão {{ question_num }}</title>
-    </head>
 
-    <body>
-        <form action="{% url 'question_answer' %}" method="POST">
-            {% csrf_token %}
-            <input type="hidden" name="identificador" value="{{ question.identificador }}"></input>
-            <p>{{ question_text}}</p>
+<head>
+    <title>Questão {{ question_num }}</title>
+</head>
 
-            {% for letter, value in answers.items %}
-                <input type="radio" name="answer" value="{{ letter }}"><b>{{ letter }}.</b> {{ value }}</input><br/>
-            {% endfor %}
+<body>
+    {% if request.user %}
+        {% if not request.user.is_anonymous %}
+            {{user}} - <a href="{% url 'logout' %}">Sair</a>
+        {% else %}
+            <a href="{% url 'login' %}">Login</a>
+        {% endif %}
+    {% endif %}
 
-            <br/>
-            <input type="submit" value="Ok" />
-        </form>
-    </body>
+    <br/>
+    <form action="{% url 'question_answer' %}" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="identificador" value="{{ question.identificador }}"></input>
+        <p>{{ question_text}}</p>
+
+        {% for letter, value in answers.items %}
+        <input type="radio" name="answer" value="{{ letter }}"><b>{{ letter }}.</b> {{ value }}</input><br/> {% endfor %}
+
+        <br/>
+        <input type="submit" value="Ok" />
+    </form>
+</body>
+
 </html>
