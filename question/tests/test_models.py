@@ -1,7 +1,15 @@
 import pytest
+from django.contrib.auth.models import User
 
 from question.models import Questao, Resposta
 
+
+@pytest.fixture
+def criar_usuario(db):
+    user = User.objects.create_user(
+            username = 'user_test',
+            password = 'pass_test')
+    return user
 
 @pytest.fixture
 def create_questao(db):
@@ -56,9 +64,11 @@ def test_questao_create_object():
 
 
 @pytest.fixture
-def create_resposta_db(db, create_questao):
+def create_resposta_db(db, create_questao, criar_usuario):
     questao = create_questao
+    user = criar_usuario
     resposta = Resposta.objects.create(
+        usuario = user,
         questao = questao,
         alternativa_escolhida = 'e',
         alternativa_correta = True,

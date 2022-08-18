@@ -48,10 +48,12 @@ def question_answer(request):
         ativa=True
         ).order_by('numero', 'pk').first()
     
-    Resposta.objects.create(
-        questao=questao,
-        alternativa_escolhida=answer,
-        alternativa_correta=is_correct)
+    if request.user.is_authenticated:
+        Resposta.objects.create(
+            questao=questao,
+            usuario=request.user,
+            alternativa_escolhida=answer,
+            alternativa_correta=is_correct)
 
     context = {
         'proxima_questao': proximo,

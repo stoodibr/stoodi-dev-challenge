@@ -2,7 +2,7 @@ import pytest
 from django.urls import reverse
 
 from question.models import Questao, Resposta
-
+from usuario.tests.test_views import create_user
 
 @pytest.fixture
 def create_questao(db):
@@ -85,9 +85,23 @@ def test_answers_whith_next_question(client):
 
 
 @pytest.mark.django_db
-def test_resposta_generate_by_answer(client, create_questao):
+def test_resposta_generate_by_answer_not_authenticated(client, create_questao):
     questao = create_questao
     url_str = reverse('question_answer')
+
+    data = client.post(url_str, data={'identificador':questao.identificador, 'answer': 'c'})
+
+    assert Resposta.objects.count() == 0
+
+
+@pytest.mark.django_db
+def test_resposta_generate_by_answer_authenticated(client, create_questao, create_user):
+    questao = create_questao
+    url_str = reverse('question_answer')
+    url_login_str = reverse('login')
+
+    data = client.post(url_login_str, data={
+        'username':'user_test', 'password': 'pass_test'})
 
     data = client.post(url_str, data={'identificador':questao.identificador, 'answer': 'c'})
 

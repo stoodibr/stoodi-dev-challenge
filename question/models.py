@@ -1,6 +1,6 @@
 import uuid
 from django.db import models
-
+from django.contrib.auth.models import User
 
 
 class Questao(models.Model):
@@ -60,6 +60,11 @@ class Resposta(models.Model):
         related_name='log_respostas',
         null=True,
         on_delete=models.SET_NULL)
+    usuario = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='minhas_respostas',
+        editable=True)
     data_resposta = models.DateTimeField(
         'Data de cadastro da resposta',
         null=True,
