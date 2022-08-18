@@ -13,6 +13,7 @@ def question(request, id):
     if questions:
         alternatives = Alternatives.objects.filter(question__id=id)
         context['questions'] = {
+                                    "question_complete":questions,
                                     "question":questions.question_text,
                                     "alternatives":alternatives
                                 }
