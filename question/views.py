@@ -21,11 +21,11 @@ def question(request):
     return render(request, 'question/question.html', context=context)
 
 def question_answer(request):
-    answer = request.POST.get('answer', 'z')
-    is_correct = answer == 'd'
+    answer_id = request.POST.get('answer')
+    alternative = Alternatives.objects.get(id=answer_id)
 
     context = {
-        'is_correct': is_correct,
+        'is_correct': alternative.is_correct,
     }
 
     return render(request, 'question/answer.html', context=context)

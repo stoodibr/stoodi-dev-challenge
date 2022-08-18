@@ -11,7 +11,7 @@
             <p>{{ question.question }}</p>
 
                 {% for alternative in question.alternatives %}
-                    <input type="radio" name="answer" value="{{ alternative.alternative_order }}"><b>{{ alternative.alternative_order }}.</b> {{ alternative }}</input><br/>
+                    <input type="radio" name="answer" value="{{ alternative.id }}"><b>{{ alternative.alternative_order }}.</b> {{ alternative }}</input><br/>
                 {% endfor %}
             {% endfor %}
 
