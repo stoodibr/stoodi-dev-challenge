@@ -1,31 +1,40 @@
 #coding: utf8
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Question, Alternatives
 
-def question(request):
-    questions = Question.objects.all()
+def question(request, id):
+    questions = Question.objects.get(id=id)
     
     context = {
-        "questions":[]
+        "questions":{},
         }
     
-    for question in questions:
-        alternatives = Alternatives.objects.filter(question=question)
-        context['questions'].append(
-            {
-                "question":question,
-                "alternatives":alternatives
-            }
-        )
-
+    if questions:
+        alternatives = Alternatives.objects.filter(question__id=id)
+        context['questions'] = {
+                                    "question":questions.question_text,
+                                    "alternatives":alternatives
+                                }
+        
     return render(request, 'question/question.html', context=context)
-
+    
 def question_answer(request):
-    answer_id = request.POST.get('answer')
-    alternative = Alternatives.objects.get(id=answer_id)
+    questions = Question.objects.all()
+    try:
+        answer_id = request.POST.get('answer')
+        
+        alternative = Alternatives.objects.get(id=answer_id)
 
-    context = {
-        'is_correct': alternative.is_correct,
-    }
-
-    return render(request, 'question/answer.html', context=context)
+        context = {
+            'is_correct': alternative.is_correct,
+            'id': alternative.question.id
+        }
+        
+        if alternative.question.id < len(questions):
+            context['next'] = alternative.question.id + 1
+        else:
+            context['next'] = 1
+            
+        return render(request, 'question/answer.html', context=context)
+    except:
+        return redirect('question', id=1)
