@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Cadastrar</title>
+</head>
+
+<body>
+    <span>Cadastrar novo usuário</span>
+    <br>
+    <br>
+    <form method="POST" action="{% url 'cadastro' %}">
+        {% csrf_token %}
+
+        {% for field in form %}
+            <b>{{ field.label }}</b>:
+            <br>
+                {{ field }}
+            <br>
+            <br>
+        {% endfor %}
+
+        {% if error %}
+            <span style="color: red;">{{ error }}</span>
+            <br>
+            <br>
+        {% endif %}
+
+        <input type="submit" value="Cadastrar" />
+    </form>
+</body>
+
+</html>

@@ -1,19 +1,36 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Resposta</title>
-    </head>
 
-    <body>
-    {% if is_correct %}
-        Resposta correta!
-    {% else %}
-        Resposta errada!
+<head>
+    <title>Resposta</title>
+</head>
+
+<body>
+    {% if request.user %}
+        {% if not request.user.is_anonymous %}
+            {{user}} - <a href="{% url 'logout' %}">Sair</a>
+        {% else %}
+            <a href="{% url 'login' %}">Login</a>
+        {% endif %}
     {% endif %}
+    <br/>
+    <br/>
+    Questão: {{questao.numero}}
+    <br/>
+    <br/> {{questao.enunciado}} <br/>
+    <br/> {% if is_correct %} Alternativa selecionada: ({{questao.alternativa_correta}})
+    <br/> Resposta correta! {% else %} Alternativa selecionada: ({{answer}})
+    <br/> Resposta errada! {% endif %}
 
     <br/>
     <br/>
-    <a href="{% url 'question' %}">Tente novamente</a>
+    <a href="{% url 'question_idenficated' questao.identificador %}">Tente novamente</a>
+    <br/>
+    <br/>
+    {% if proxima_questao.identificador != questao.identificador %}
+        <a href="{% url 'question_idenficated' proxima_questao.identificador %}">Próxima questão</a>
+    {% endif%}
 
-    </body>
+</body>
+
 </html>

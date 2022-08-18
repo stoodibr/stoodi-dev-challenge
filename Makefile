@@ -17,7 +17,7 @@ build: ## Build the container
 	docker run -dit --name $(CONTAINER) -v $(shell pwd):/deploy -p 8000:8000 $(IMAGE) /bin/bash
 
 test: ## Run tests
-	$(MANAGECMD) python3 manage.py test
+	$(MANAGECMD) pytest
 
 restart: ## Restart the container
 	docker restart $(CONTAINER)

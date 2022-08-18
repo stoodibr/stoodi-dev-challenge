@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Minhas respostas</title>
+</head>
+
+<body>
+
+Minhas respostas:
+<br/>
+<br/>
+
+<ul>
+    {% for resposta in respostas %}
+    <li>
+        Questão ({{ resposta.questao.numero }}) - Respondido em
+        {{ resposta.data_resposta | date:"d/m/Y - H:i"}}<br/>
+        Enunciado: <b>{{ resposta.questao.enunciado }}</b><br/>
+
+        Minha resposta: <b>({{ resposta.alternativa_escolhida }})</b> -
+        Acertou:
+        {% if resposta.alternativa_correta %}
+            <b>SIM</b>
+        {% else %}
+            <b>NÃO</b>
+        {% endif %}
+
+    </li>
+    </b><br/>
+    {% empty %}
+    <li>Nenhuma resposta identificada</li>
+    {% endfor %}
+</ul>
+</body>
+
+</html>
